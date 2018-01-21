@@ -3,6 +3,7 @@ import ListHomeWork from '../Containers/ListHomeWork'
 import ListHomeWorkTest from '../Containers/ListHomeWorkTest'
 import LaunchScreen from '../Containers/LaunchScreen'
 import TabNavigation from '../Containers/TabNavigation'
+import FooterNavigation from '../Containers/FooterTabNavigation'
 
 import styles from './Styles/NavigationStyles'
 
@@ -12,10 +13,11 @@ const PrimaryNav = StackNavigator({
   ListHomeWorkTest: { screen: ListHomeWorkTest },
   LaunchScreen: { screen: LaunchScreen },
   TabNavigation: { screen: TabNavigation },
+  FooterNavigation: { screen: FooterNavigation}
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'TabNavigation',
+  initialRouteName: 'FooterNavigation',
   navigationOptions: {
     headerStyle: styles.header
   }
