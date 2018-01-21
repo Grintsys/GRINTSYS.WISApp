@@ -1,26 +1,50 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FlatList } from "react-native";
-import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading, Icon, Text, Button, Badge, } from "native-base";
+import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading, 
+  Icon, Text, Button, Badge, Right, Left, Body, Title} from "native-base";
 
 import Tab1 from "./ListHomeWorkTest";
 import Tab2 from "./ListHomeWork";
 import Tab3 from "./LaunchScreen";
 import Styles from "./Styles/FooterTabStyles";
 
+/*
+
+<Left>
+            <Button transparent>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+
+*/
 class FooterTabNavigation extends React.Component {
   render() {
     return (
       <Container>
-        <Header />
-        <Tabs initialPage={0} ref={(tabview) => { this.tabview = tabview }} tabBarUnderlineStyle={{opacity: 0}}>
-          <Tab heading={ <TabHeading/> }>
-            <Tab1 />
+        <Header iosBarStyle="light-content">
+          <Left>
+              <Button transparent>
+                <Icon name='menu' />
+              </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Text style={Styles.footerText}>Cambiar</Text>
+            </Button>
+          </Right>
+        </Header>
+        <Tabs initialPage={0} ref={(tabview) => { this.tabview = tabview }} tabBarUnderlineStyle={{opacity: 0, backgroundColor: "transparent",}}>
+          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
+           <Tab1 />
           </Tab>
-          <Tab heading={ <TabHeading />}>
+          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
             <Tab2 />
           </Tab>
-          <Tab heading={ <TabHeading />}>
+          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
             <Tab3 />
           </Tab>
         </Tabs>
