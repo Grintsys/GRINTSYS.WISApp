@@ -1,0 +1,46 @@
+{
+  "TotalDue": "7500 HNL",
+  "Payments":
+  [{
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": true,
+    "Date":"2018-01-09T00:00:00.000Z"
+  },
+  {
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": false,
+    "Date":"2018-02-09T00:00:00.000Z"
+  },
+  {
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": false,
+    "Date":"2018-03-09T00:00:00.000Z"
+  },
+  {
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": false,
+    "Date":"2018-04-09T00:00:00.000Z"
+  },
+  {
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": false,
+    "Date":"2018-05-09T00:00:00.000Z"
+  },
+  {
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": false,
+    "Date":"2018-06-09T00:00:00.000Z"
+  },
+  {
+    "Description":"Cuota 1",
+    "Total":"3,500 HNL",
+    "IsOverdue": false,
+    "Date":"2018-06-09T00:00:00.000Z"
+  }]
+}

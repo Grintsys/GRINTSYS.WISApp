@@ -1,0 +1,76 @@
+{
+    "events": [{
+        "id": 6,
+        "date": "2017-09-21 11:57:52",
+        "title": "Examen Primer parcial",
+        "description": "Example content",
+        "image": {
+            "url": "http://tribe.localhost/wp-content/uploads/2017/09/raccoon.jpg",
+            "id": "8",
+            "extension": "jpg",
+            "width": 220,
+            "height": 147,
+            "sizes": {
+                "thumbnail": {
+                    "width": 150,
+                    "height": 147,
+                    "mime-type": "image/jpeg",
+                    "url": "http://tribe.localhost/wp-content/uploads/2017/09/raccoon-150x147.jpg"
+                }
+            }
+        },
+        "all_day": false,
+        "start_date": "2017-09-21 08:00:00",
+        "end_date": "2017-09-21 17:00:00"     
+        },
+        {
+            "id": 6,
+            "date": "2017-09-21 11:57:52",
+            "title": "Examen Segundo parcial",
+            "description": "Example content",
+            "image": {
+                "url": "http://tribe.localhost/wp-content/uploads/2017/09/raccoon.jpg",
+                "id": "8",
+                "extension": "jpg",
+                "width": 220,
+                "height": 147,
+                "sizes": {
+                    "thumbnail": {
+                        "width": 150,
+                        "height": 147,
+                        "mime-type": "image/jpeg",
+                        "url": "http://tribe.localhost/wp-content/uploads/2017/09/raccoon-150x147.jpg"
+                    }
+                }
+            },
+            "all_day": false,
+            "start_date": "2017-09-21 08:00:00",
+            "end_date": "2017-09-21 17:00:00"     
+        },
+        {
+            "id": 6,
+            "date": "2017-09-21 11:57:52",
+            "title": "Feria de la ciencia",
+            "description": "Example content",
+            "image": {
+                "url": "http://tribe.localhost/wp-content/uploads/2017/09/raccoon.jpg",
+                "id": "8",
+                "extension": "jpg",
+                "width": 220,
+                "height": 147,
+                "sizes": {
+                    "thumbnail": {
+                        "width": 150,
+                        "height": 147,
+                        "mime-type": "image/jpeg",
+                        "url": "http://tribe.localhost/wp-content/uploads/2017/09/raccoon-150x147.jpg"
+                    }
+                }
+            },
+            "all_day": false,
+            "start_date": "2017-09-21 08:00:00",
+            "end_date": "2017-09-21 17:00:00"     
+    }],
+    "total": 10,
+    "total_pages": 1
+}
