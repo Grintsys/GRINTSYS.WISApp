@@ -7,13 +7,7 @@ export default StyleSheet.create({
   container: {
     paddingBottom: Metrics.baseMargin
   },
-  footerText: {
-    alignItems: 'center',
-    fontSize: 10,
-    paddingLeft: 2,
-    paddingRight: 2
+  bigText: {
+    fontSize: 40,
   },
-  headerText: {
-    fontSize: 12,
-  }
 })

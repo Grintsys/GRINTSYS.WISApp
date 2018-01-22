@@ -51,6 +51,7 @@ class ListHomeWork extends React.Component {
         </Body> 
         <Right>
           <Text note>{item.Value} Pts</Text>
+          <Text note>{item.RemainTime} Dias</Text>
         </Right>
       </ListItem>
     );

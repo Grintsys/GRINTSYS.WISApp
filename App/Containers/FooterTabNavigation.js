@@ -13,50 +13,7 @@ import Styles from "./Styles/FooterTabStyles";
 
 /*
 
-<Left>
-            <Button transparent>
-              <Icon name='arrow-back' />
-            </Button>
-          </Left>
-
-*/
-class FooterTabNavigation extends React.Component {
-  render() {
-    return (
-      <Container>
-        <Header iosBarStyle="light-content">
-          <Left>
-              <Button transparent>
-                <Icon name='menu' />
-              </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Text style={Styles.footerText}>Cambiar</Text>
-            </Button>
-          </Right>
-        </Header>
-        <Tabs initialPage={0} ref={(tabview) => { this.tabview = tabview }} tabBarUnderlineStyle={{opacity: 0, backgroundColor: "transparent",}}>
-          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
-           <Tab1 />
-          </Tab>
-          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
-            <Tab2 />
-          </Tab>
-          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
-            <Tab3 />
-          </Tab>
-          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
-            <Tab4 />
-          </Tab>
-          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
-            <Tab5 />
-          </Tab>
-        </Tabs>
-        <Footer>
+ <Footer>
           <FooterTab>
             <Button badge vertical active onPress={() => this.tabview.goToPage(0)}>
               <Badge><Text>2</Text></Badge>
@@ -83,6 +40,54 @@ class FooterTabNavigation extends React.Component {
             </Button>
           </FooterTab>
         </Footer>
+
+*/
+class FooterTabNavigation extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Header iosBarStyle="light-content">
+          <Left>
+              <Button transparent>
+                <Icon name='menu' />
+              </Button>
+          </Left>
+          <Body>
+            <Title>WIS</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Text style={Styles.headerText}>Cambiar</Text>
+            </Button>
+          </Right>
+        </Header>
+        <Tabs tabBarPosition= "bottom" initialPage={0} ref={(tabview) => { this.tabview = tabview }} tabBarUnderlineStyle={{opacity: 0, backgroundColor: "transparent",}}>
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon active name="ios-paper-outline" />
+          </TabHeading>}>
+           <Tab1 />
+          </Tab>
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon name="ios-clock-outline" />
+          </TabHeading>}>
+            <Tab2 />
+          </Tab>
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon name="ios-calendar-outline" />
+          </TabHeading>}>
+            <Tab3 />
+          </Tab>
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon name="md-stats" />
+          </TabHeading>}>
+            <Tab4 />
+          </Tab>
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon name="logo-usd" />
+          </TabHeading>}>
+            <Tab5 />
+          </Tab>
+        </Tabs>     
       </Container>
     );
   }

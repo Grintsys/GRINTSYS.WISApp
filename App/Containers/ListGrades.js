@@ -5,6 +5,7 @@ import { List, ListItem, Text, View, Container, Content, Header, Title, Button, 
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../Services/Api"
 import FJSON from 'format-json'
+import Styles from './Styles/HeaderTabStyles'
 
 class ListGrades extends React.Component {
 
@@ -52,13 +53,14 @@ class ListGrades extends React.Component {
   _renderItem = ({ item }) => {
     return (
       <ListItem>
-        <Thumbnail square size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
         <Body>
-          <Text>{item.Total}</Text>
+          <Text style={Styles.bigText}>{item.Total}</Text>
           <Text note>{item.Subject}</Text>
-        </Body> 
+        </Body>
         <Right>
-          <Text note>Fecha: {item.Date}</Text>
+          <Text note>E: {item.Exam}</Text>
+          <Text note>TA: {item.WorkInClass}</Text>
+          <Text note>TC: {item.WorkInHome}</Text>
         </Right>
       </ListItem>
     );
@@ -84,14 +86,15 @@ class ListGrades extends React.Component {
     return (
       <Container>
         <Content>
+         
           <Button block bordered>
               <Text>Promedio: {this.state.data.Average}</Text>
           </Button>
 
+
         <FlatList data={this.state.data.Grades} 
                   keyExtractor={(item, index) => index} 
                   renderItem={this._renderItem} />
-
         </Content>
       </Container>
     );

@@ -52,13 +52,13 @@ class ListFinances extends React.Component {
   _renderItem = ({ item }) => {
     return (
       <ListItem>
-        <Thumbnail square size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+         <Icon name="ios-calendar-outline" />
         <Body>
           <Text>{item.Description}</Text>
           <Text note>{item.Total}</Text>
         </Body> 
         <Right>
-          <Text note>Pago {item.Date}</Text>
+          <Text note>{item.Date}</Text>
         </Right>
       </ListItem>
     );
