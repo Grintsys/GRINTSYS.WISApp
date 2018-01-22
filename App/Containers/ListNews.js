@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FlatList } from "react-native";
-import { List, ListItem, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
+import { List, ListItem, Text, View, Container, Image, Content, Header, Card, CardItem, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../Services/Api"
 import FJSON from 'format-json'
 
-class ListHomeWorkTest extends React.Component {
+class ListNews extends React.Component {
 
   api = {}
 
@@ -28,8 +28,16 @@ class ListHomeWorkTest extends React.Component {
     });  
   }
 
+  getDataLocal(){
+    const data = require("../Fixtures/news.json");
+    this.setState({
+      data: data.posts,
+    })
+  }
+
   componentDidMount(){
-    this.getData();
+    //this.getData();
+    this.getDataLocal();
   }
 
   /*
@@ -43,16 +51,24 @@ class ListHomeWorkTest extends React.Component {
 
   _renderItem = ({ item }) => {
     return (
-      <ListItem>
-        <Thumbnail square size={80}  source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
-        <Body>
-          <Text>{item.Description}</Text>
-          <Text note>{item.Subject}</Text>
-        </Body> 
-        <Right>
-          <Text note>{item.Value} Pts</Text>
-        </Right>
-      </ListItem>
+      <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+              <Body>
+                <Text>{item.title}</Text>
+                <Text note>{item.published_at}</Text>
+              </Body>
+            </Left>
+          </CardItem> 
+          <CardItem>
+            <Left>            
+              <Body>                
+                  <Text>{item.plaintext}</Text>
+              </Body>
+              </Left>
+            </CardItem>
+      </Card>
     );
   };
 
@@ -75,9 +91,12 @@ class ListHomeWorkTest extends React.Component {
   render() {
     return (
       <Container>
-        <FlatList data={this.state.data} 
-                  keyExtractor={(item, index) => index} 
-                  renderItem={this._renderItem} />
+        <Content>
+          <Card style={{ flex: 0 }}
+                dataArray={this.state.data}
+                renderRow={(item) => this._renderItem({item})} >
+          </Card>
+        </Content>
       </Container>
     );
   }
@@ -88,4 +107,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ListHomeWorkTest);
+export default connect(mapStateToProps)(ListNews);

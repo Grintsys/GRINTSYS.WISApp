@@ -4,9 +4,11 @@ import { FlatList } from "react-native";
 import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading, 
   Icon, Text, Button, Badge, Right, Left, Body, Title} from "native-base";
 
-import Tab1 from "./ListHomeWorkTest";
+import Tab1 from "./ListNews";
 import Tab2 from "./ListHomeWork";
-import Tab3 from "./LaunchScreen";
+import Tab3 from "./ListFinances";
+import Tab4 from "./ListGrades";
+import Tab5 from "./ListFinances";
 import Styles from "./Styles/FooterTabStyles";
 
 /*
@@ -46,6 +48,12 @@ class FooterTabNavigation extends React.Component {
           </Tab>
           <Tab style={{elevation: 0}} heading={ <TabHeading />}>
             <Tab3 />
+          </Tab>
+          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
+            <Tab4 />
+          </Tab>
+          <Tab style={{elevation: 0}} heading={ <TabHeading />}>
+            <Tab5 />
           </Tab>
         </Tabs>
         <Footer>

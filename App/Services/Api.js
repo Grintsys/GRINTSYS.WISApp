@@ -35,6 +35,10 @@ const create = (baseURL = 'http://52.229.31.185:8090/api') => {
   // way at this level.
   //
   const getHomeWork = (grade, section) => api.get(`/homework/${grade}.${section}`)
+  const getNews = () => api.get(`/news`)
+  const getPayments = (user) => api.get(`/payments/${user}`)
+  const getGrades = (user) => api.get(`/grades/${user}`)
+  const getCalendar = (user) => api.get(`/calendar/${user}`)
 
   // ------
   // STEP 3
@@ -51,6 +55,10 @@ const create = (baseURL = 'http://52.229.31.185:8090/api') => {
   return {
     // a list of the API functions from step 2
     getHomeWork,
+    getNews,
+    getPayments,
+    getGrades,
+    getCalendar
   }
 }
 

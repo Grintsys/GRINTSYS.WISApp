@@ -12,7 +12,11 @@ import styles from './Styles/APITestingScreenStyles'
 
 // API buttons here:
 const endpoints = [
-  { label: 'HomeWork', endpoint: 'getHomeWork', args: ['5', '2'] }
+  { label: 'HomeWork', endpoint: 'getHomeWork', args: ['5', '2'] },
+  { label: 'News', endpoint: 'getNews' },
+  { label: 'Payments', endpoint: 'getPayments', args: ['2015192'] },
+  { label: 'Grades', endpoint: 'getGrades', args: ['2015192'] },
+  { label: 'Calendar', endpoint: 'getCalendar', args: ['2015192'] }
 ]
 
 export default class APITestingScreen extends React.Component {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { FlatList } from "react-native";
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, } from "native-base";
 
-import Tab1 from "./ListHomeWorkTest";
+import Tab1 from "./ListHomeWork";
 import Tab2 from "./ListHomeWork";
 import Tab3 from "./LaunchScreen";
 

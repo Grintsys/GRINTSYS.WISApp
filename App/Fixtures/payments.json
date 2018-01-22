@@ -5,42 +5,42 @@
     "Description":"Cuota 1",
     "Total":"3,500 HNL",
     "IsOverdue": true,
-    "Date":"2018-01-09T00:00:00.000Z"
+    "Date":"Enero"
   },
   {
-    "Description":"Cuota 1",
+    "Description":"Cuota 2",
     "Total":"3,500 HNL",
     "IsOverdue": false,
-    "Date":"2018-02-09T00:00:00.000Z"
+    "Date":"Febre"
   },
   {
-    "Description":"Cuota 1",
+    "Description":"Cuota 3",
     "Total":"3,500 HNL",
     "IsOverdue": false,
-    "Date":"2018-03-09T00:00:00.000Z"
+    "Date":"Marzo"
   },
   {
-    "Description":"Cuota 1",
+    "Description":"Cuota 4",
     "Total":"3,500 HNL",
     "IsOverdue": false,
-    "Date":"2018-04-09T00:00:00.000Z"
+    "Date":"Abril"
   },
   {
-    "Description":"Cuota 1",
+    "Description":"Cuota 5",
     "Total":"3,500 HNL",
     "IsOverdue": false,
-    "Date":"2018-05-09T00:00:00.000Z"
+    "Date":"Mayo"
   },
   {
-    "Description":"Cuota 1",
+    "Description":"Cuota 6",
     "Total":"3,500 HNL",
     "IsOverdue": false,
-    "Date":"2018-06-09T00:00:00.000Z"
+    "Date":"Junio"
   },
   {
-    "Description":"Cuota 1",
+    "Description":"Cuota 7",
     "Total":"3,500 HNL",
     "IsOverdue": false,
-    "Date":"2018-06-09T00:00:00.000Z"
+    "Date":"Julio"
   }]
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FlatList } from "react-native";
-import { List, ListItem, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
+import { List, ListItem, Text, View, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../Services/Api"
 import FJSON from 'format-json'
 
-class ListHomeWork extends React.Component {
+class ListGrades extends React.Component {
 
   api = {}
 
@@ -28,8 +28,16 @@ class ListHomeWork extends React.Component {
     });  
   }
 
+  getDataLocal(){
+    const data = require("../Fixtures/grades.json");
+    this.setState({
+      data: data,
+    })
+  }
+
   componentDidMount(){
-    this.getData();
+    //this.getData();
+    this.getDataLocal();
   }
 
   /*
@@ -44,13 +52,13 @@ class ListHomeWork extends React.Component {
   _renderItem = ({ item }) => {
     return (
       <ListItem>
-        <Thumbnail square size={80}  source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+        <Thumbnail square size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
         <Body>
-          <Text>{item.Description}</Text>
+          <Text>{item.Total}</Text>
           <Text note>{item.Subject}</Text>
         </Body> 
         <Right>
-          <Text note>{item.Value} Pts</Text>
+          <Text note>Fecha: {item.Date}</Text>
         </Right>
       </ListItem>
     );
@@ -75,9 +83,16 @@ class ListHomeWork extends React.Component {
   render() {
     return (
       <Container>
-        <FlatList data={this.state.data} 
+        <Content>
+          <Button block bordered>
+              <Text>Promedio: {this.state.data.Average}</Text>
+          </Button>
+
+        <FlatList data={this.state.data.Grades} 
                   keyExtractor={(item, index) => index} 
                   renderItem={this._renderItem} />
+
+        </Content>
       </Container>
     );
   }
@@ -88,4 +103,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ListHomeWork);
+export default connect(mapStateToProps)(ListGrades);
