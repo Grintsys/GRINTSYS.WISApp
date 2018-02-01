@@ -34,6 +34,7 @@ const create = (baseURL = 'http://52.229.31.185:8090/api') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
+  const doLogin = (username, password) => api.post(`/login`, { username: username, password: password} )
   const getHomeWork = (grade, section) => api.get(`/homework/${grade}.${section}`)
   const getNews = () => api.get(`/news`)
   const getPayments = (user) => api.get(`/payments/${user}`)
@@ -54,6 +55,7 @@ const create = (baseURL = 'http://52.229.31.185:8090/api') => {
   //
   return {
     // a list of the API functions from step 2
+    doLogin,
     getHomeWork,
     getNews,
     getPayments,

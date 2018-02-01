@@ -12,7 +12,6 @@ import Tab5 from "./ListFinances";
 import Styles from "./Styles/FooterTabStyles";
 
 /*
-
  <Footer>
           <FooterTab>
             <Button badge vertical active onPress={() => this.tabview.goToPage(0)}>
