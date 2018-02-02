@@ -6,7 +6,7 @@ import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading,
 
 import Tab1 from "./ListNews";
 import Tab2 from "./ListHomeWork";
-import Tab3 from "./ListFinances";
+import Tab3 from "./CalendarScreen";
 import Tab4 from "./ListGrades";
 import Tab5 from "./ListFinances";
 import Styles from "./Styles/FooterTabStyles";
