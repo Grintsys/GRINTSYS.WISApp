@@ -3,7 +3,7 @@ import apisauce from 'apisauce'
 import Secrets from 'react-native-config'
 
 // our "constructor"
-const create = (baseURL = Secrets.WIS_API_URL) => {
+const create = (baseURL = Secrets.GOOGLE_CALENDAR_API_URL) => {
   // ------
   // STEP 1
   // ------
@@ -35,12 +35,7 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const doLogin = (username, password) => api.post(`/login`, { username: username, password: password} )
-  const getHomeWork = (grade, section) => api.get(`/homework/${grade}.${section}`)
-  const getNews = () => api.get(`/news`)
-  const getPayments = (user) => api.get(`/payments/${user}`)
-  const getGrades = (user) => api.get(`/grades/${user}`)
-  const getCalendar = (user) => api.get(`/calendar/${user}`)
+  const getCalendarEvents = (calendarId, key) => api.get(`/${calendarId}/events?key=${key}`)
 
   // ------
   // STEP 3
@@ -56,12 +51,7 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
   //
   return {
     // a list of the API functions from step 2
-    doLogin,
-    getHomeWork,
-    getNews,
-    getPayments,
-    getGrades,
-    getCalendar
+    getCalendarEvents,
   }
 }
 

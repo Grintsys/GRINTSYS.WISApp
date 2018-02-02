@@ -5,24 +5,33 @@ import {
   StyleSheet
 } from 'react-native';
 import {Agenda} from 'react-native-calendars';
+import API from '../../Services/CalendarApi'
+import Secrets from 'react-native-config'
 
 export default class Calendar extends Component {
+
+  api = {}
+
   constructor(props) {
     super(props);
     this.state = {
-      items: {}
+      items: {},
+      selectedDate: this.timeToString()
     };
+
+    this.api = API.create();
   }
 
   render() {
     return (
       <Agenda
         items={this.state.items}
-        loadItemsForMonth={this.loadItems.bind(this)}
-        selected={'2017-05-16'}
+        loadItemsForMonth={(day) => this.loadItemsForMonth(day)}
+        selected={this.state.selectedDate}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
+        //theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
         // markingType={'period'}
         // markedDates={{
         //    '2017-05-08': {textColor: '#666'},
@@ -35,35 +44,73 @@ export default class Calendar extends Component {
         //    '2017-05-26': {endingDay: true, color: 'gray'}}}
          // monthFormat={'yyyy'}
          // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-        //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
       />
     );
   }
 
-  loadItems(day) {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 5);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
-          }
+  getData = async() => {
+    //using secrets .env file, please define your own environtment fields
+    const result = await this.api.getCalendarEvents(Secrets.GOOGLE_CALENDAR_ID, Secrets.GOOGLE_CALENDAR_KEY);
+    var events = {};
+
+    /*
+    result.data.items.map((event) =>{
+      events.push({
+        start: event.start.date || event.start.dateTime,
+        end: event.end.date || event.end.dateTime,
+        title: event.summary,
+      })
+    });*/
+
+    if(result.data.items){
+      result.data.items.map(function(obj){
+
+        //TODO: enhacement convert toISOString, needs some refactory
+        var eventDate = new Date(obj.start.date || obj.start.dateTime);
+        var strTime = eventDate.toISOString().split('T')[0];
+
+        //if not exist a record then create the array
+        if (!events[strTime]) {
+          events[strTime] = [];
+          events[strTime].push({
+              name: obj.summary,
+              //height: Math.max(50, Math.floor(Math.random() * 150))
+          });
+        } else {
+          events[strTime].push({
+            name: obj.summary,
+            //height: Math.max(50, Math.floor(Math.random() * 150))
+          });
         }
+        return null;
+      });
+
+      //a bug when the current date is empty also show a empy selected date
+      if(!events[this.state.selectedDate]){
+          events[this.state.selectedDate] = [];
+          events[this.state.selectedDate].push({
+              name: 'No hay eventos para Hoy',
+              //height: Math.max(50, Math.floor(Math.random() * 150))
+          });
       }
-      //console.log(this.state.items);
+
       const newItems = {};
-      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+      Object.keys(events).forEach(key => {newItems[key] = events[key];});
+
       this.setState({
         items: newItems
       });
-    }, 1000);
-    // console.log(`Load Items for ${day.year}-${day.month}`);
+      //console.log(result.data.items);
+      //console.log(events);
+    }
+  }
+
+  loadItemsForMonth(day) {
+    
+      console.log(`Load Items for ${day.year} - ${day.month}`);
+
+      this.getData();
   }
 
   renderItem(item) {
@@ -82,9 +129,13 @@ export default class Calendar extends Component {
     return r1.name !== r2.name;
   }
 
-  timeToString(time) {
-    const date = new Date(time);
-    return date.toISOString().split('T')[0];
+  timeToString(datetime) {
+    if(datetime){
+      var myDate = new Date(datetime);
+      return myDate.toISOString().split('T')[0];
+    }
+
+    return new Date().toISOString().split('T')[0];
   }
 }
 
