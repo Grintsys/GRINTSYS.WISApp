@@ -4,7 +4,9 @@ import { FlatList } from "react-native";
 import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading, 
   Icon, Text, Button, Badge, Right, Left, Body, Title} from "native-base";
 
-import Tab1 from "./ListNews";
+//import Tab1 from "./ListNews";
+
+import Tab1 from "./NewsScreen"
 import Tab2 from "./ListHomeWork";
 import Tab3 from "./CalendarScreen";
 import Tab4 from "./ListGrades";
