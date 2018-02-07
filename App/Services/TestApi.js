@@ -3,7 +3,7 @@ import apisauce from 'apisauce'
 import Secrets from 'react-native-config'
 
 // our "constructor"
-const create = (baseURL = Secrets.WIS_API_URL) => {
+const create = (baseURL = "http://blog.grintsys.com/ghost/api/v0.1") => {
   // ------
   // STEP 1
   // ------
@@ -35,14 +35,7 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const doLogin = (username, password) => api.post(`/login`, { username: username, password: password} )
-  const getStudent = (username) => api.get(`/student/${username}$`)
-  const getStudentData = (student) => api.get(`student/data/${student}`)
-  const getStudents = (username) => api.get(`/students/${username}`)
-  const getHomeWork = (grade, section) => api.get(`/homework/${grade}.${section}`)
-  const getNews = () => api.get(`/news`)
-  const getPayments = (grade, plancod) => api.get(`/payments/${grade}.${plancod}`)
-  const getGrades = (grade, section, student, partial) => api.get(`/grades/${grade}.${section}.${student}.${partial}`)
+  const getPosts = () => api.get(`/posts?client_id=ghost-frontend&client_secret=3560fd562c2e`)
 
   // ------
   // STEP 3
@@ -58,14 +51,7 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
   //
   return {
     // a list of the API functions from step 2
-    doLogin,
-    getStudent,
-    getStudentData,
-    getStudents,
-    getHomeWork,
-    getNews,
-    getPayments,
-    getGrades
+    getPosts,
   }
 }
 

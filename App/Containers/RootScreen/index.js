@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, AsyncStorage } from 'react'
 
 import AuthScreen from '../AuthScreen'
 //import HomeScreen from '../HomeScreen'
@@ -30,16 +30,41 @@ export class LoginAnimation extends Component {
     this.api = API.create()
   }
 
-  async doLogin(username, password){
+  doLogin = async (username, password) =>{
 
     const response = await this.api.doLogin(username, password);
 
-    console.log(response.message);
+    if(response.success){
+
+      let users = response.data.users;
+
+      if(users[0].StudentCode) this.getStudentData(users[0].StudentCode);
+
+      AsyncStorage.setItem('Users', users);
+      AsyncStorage.setItem('SelectedUser', users[0]);
+    } 
+
+    debugger;
+
     this.setState({
       isLoggedIn: response.data.success,
       errorMessage: response.data.message,
       isLoading: false,
     });
+  }
+
+  getStudentData = async (student) =>{
+    const response = await this.api.getStudentData(student);
+
+    if(response.success)
+    {
+      AsyncStorage.setItem('GradeId', response.data.GradeId);
+      AsyncStorage.setItem('SectionId', response.data.SectionId);
+    }
+    else
+    {
+      console.log(`error on getStudentData(${student})`);
+    }
   }
 
   /**

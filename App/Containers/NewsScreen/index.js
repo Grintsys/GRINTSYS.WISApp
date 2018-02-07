@@ -5,6 +5,7 @@ import { List, ListItem, Text, View, Container, Image, Content, Header, Card, Ca
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../../Services/GhostApi"
 import Secrets from 'react-native-config'
+import axios from 'axios'
 
 class ListNews extends React.Component {
 
@@ -38,19 +39,32 @@ class ListNews extends React.Component {
     })
   }
 
-  componentDidMount(){
-    //this.getData();
-    this.getDataLocal();
+  getAxiosData = async () => {
+
+    var instance = axios.create({
+      baseURL: 'http://blog.grintsys.com/ghost/api/v0.1/posts',
+      timeout: 10000,
+    });
+
+    debugger;
+
+    //let url = 'http://blog.grintsys.com/ghost/api/v0.1/posts';
+    // Alter defaults after instance has been created
+    const AuthStr = 'Bearer Zz4kx85IHRlt6QkYSvbWOSABc7gAooZuelp2G9pO3SjbxyK2mXUxO8iQKKBIYJLz1jea4bzqckGH0C5D4e4Cji4Dq8qg8Evyxc8Myv5qb0NFkNR1RP1iY2XK0HRemlxQRODHVlDpBgBMKFLo7ogo4208byDIi1usVNNdhYpZnCXukqCdhxbbgwrVY6cqv6M';
+    instance.get('', { headers: { Authorization: AuthStr } })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error.message);
+    });
   }
 
-  /*
-        <ListItem 
-         style={{ justifyContent: "space-between" }}>
-        <Text>{item.Description}</Text>
-        <Text note>{item.Subject}</Text>
-      </ListItem>
-  
-  */
+  componentDidMount(){
+    //this.getData();
+    //this.getDataLocal();
+    this.getAxiosData();
+  }
 
   _renderItem = ({ item }) => {
     return (
@@ -74,22 +88,6 @@ class ListNews extends React.Component {
       </Card>
     );
   };
-
-  /*
-  
-          <Header>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body style={{ flex: 3 }}>
-            <Title>Tareas</Title>
-          </Body>
-          <Right />
-        </Header>
-  
-  */
 
   render() {
     return (
