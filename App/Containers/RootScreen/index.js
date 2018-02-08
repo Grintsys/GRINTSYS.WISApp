@@ -1,4 +1,5 @@
-import React, { Component, AsyncStorage } from 'react'
+import React, { Component } from 'react'
+import { AsyncStorage } from 'react-native'
 
 import AuthScreen from '../AuthScreen'
 //import HomeScreen from '../HomeScreen'
@@ -34,17 +35,21 @@ export class LoginAnimation extends Component {
 
     const response = await this.api.doLogin(username, password);
 
-    if(response.success){
+    if(response.data.success === true){
 
-      let users = response.data.users;
+      var users = response.data.users;
+      var studentcode = String(users[0].AluCodigo);
+      this.getStudentData(studentcode);
 
-      if(users[0].StudentCode) this.getStudentData(users[0].StudentCode);
+      try{
 
-      AsyncStorage.setItem('Users', users);
-      AsyncStorage.setItem('SelectedUser', users[0]);
-    } 
+        //await AsyncStorage.setItem('Users', JSON.stringify(users));
+        await AsyncStorage.setItem('StudentCode', studentcode);
 
-    debugger;
+      }catch(err){
+        console.log(err);
+      }
+    }
 
     this.setState({
       isLoggedIn: response.data.success,
@@ -56,10 +61,14 @@ export class LoginAnimation extends Component {
   getStudentData = async (student) =>{
     const response = await this.api.getStudentData(student);
 
-    if(response.success)
+    if(response.data.success === true)
     {
-      AsyncStorage.setItem('GradeId', response.data.GradeId);
-      AsyncStorage.setItem('SectionId', response.data.SectionId);
+      try{
+        await AsyncStorage.setItem('GradeId', String(response.data.data.GradeId));
+        await AsyncStorage.setItem('SectionId', String(response.data.data.SectionId));
+      }catch(err){
+        console.error(err);
+      }
     }
     else
     {

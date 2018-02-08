@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList } from "react-native";
+import { FlatList, AsyncStorage } from "react-native";
 import { List, ListItem, Text, View, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../Services/Api"
@@ -17,16 +17,28 @@ class ListGrades extends React.Component {
     this.state = {
       data: [],
       loading: false,
+      average: 0,
     }
 
     this.api = API.create()
   }
 
-  getData = async () =>{
-    const homeworks = await this.api.getHomeWork(5, 2);
-    this.setState({
-        data: homeworks.data,
-    });  
+  //6.1.2015192.1
+  //grado, seccion, codigoalumno, parcial
+  getData = async () => {
+    try {
+      const grade = await AsyncStorage.getItem('GradeId');
+      const section = await AsyncStorage.getItem('SectionId');
+      const student = await AsyncStorage.getItem('StudentCode');
+      const grades = await this.api.getGrades(Number(grade), Number(section), Number(student), 1);
+      const average = await this.api.getAverage(Number(grade), Number(section), Number(student), 1);
+      this.setState({
+          data: grades.data.grades,
+          average: average.data.average,
+      });
+    } catch(err){
+      console.error(err);
+    }
   }
 
   getDataLocal(){
@@ -37,8 +49,8 @@ class ListGrades extends React.Component {
   }
 
   componentDidMount(){
-    //this.getData();
-    this.getDataLocal();
+    this.getData();
+    //this.getDataLocal();
   }
 
   /*
@@ -55,12 +67,12 @@ class ListGrades extends React.Component {
       <ListItem>
         <Body>
           <Text style={Styles.bigText}>{item.Total}</Text>
-          <Text note>{item.Subject}</Text>
+          <Text note>{item.Clase}</Text>
         </Body>
         <Right>
-          <Text note>E: {item.Exam}</Text>
-          <Text note>TA: {item.WorkInClass}</Text>
-          <Text note>TC: {item.WorkInHome}</Text>
+          <Text note>E: {item.Examen}</Text>
+          <Text note>TA: {item.TrabajoAula}</Text>
+          <Text note>TC: {item.TrabajoClase}</Text>
         </Right>
       </ListItem>
     );
@@ -88,11 +100,11 @@ class ListGrades extends React.Component {
         <Content>
          
           <Button block bordered>
-              <Text>Promedio: {this.state.data.Average}</Text>
+              <Text>Promedio: {this.state.average}</Text>
           </Button>
 
 
-        <FlatList data={this.state.data.Grades} 
+        <FlatList data={this.state.data} 
                   keyExtractor={(item, index) => index} 
                   renderItem={this._renderItem} />
         </Content>

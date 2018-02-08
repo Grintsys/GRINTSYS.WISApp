@@ -46,8 +46,6 @@ class ListNews extends React.Component {
       timeout: 10000,
     });
 
-    debugger;
-
     //let url = 'http://blog.grintsys.com/ghost/api/v0.1/posts';
     // Alter defaults after instance has been created
     const AuthStr = 'Bearer Zz4kx85IHRlt6QkYSvbWOSABc7gAooZuelp2G9pO3SjbxyK2mXUxO8iQKKBIYJLz1jea4bzqckGH0C5D4e4Cji4Dq8qg8Evyxc8Myv5qb0NFkNR1RP1iY2XK0HRemlxQRODHVlDpBgBMKFLo7ogo4208byDIi1usVNNdhYpZnCXukqCdhxbbgwrVY6cqv6M';

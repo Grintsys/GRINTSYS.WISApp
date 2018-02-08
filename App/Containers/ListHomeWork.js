@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList } from "react-native";
+import { FlatList, AsyncStorage } from "react-native";
 import { List, ListItem, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../Services/Api"
@@ -21,11 +21,19 @@ class ListHomeWork extends React.Component {
     this.api = API.create()
   }
 
-  getData = async () =>{
-    const homeworks = await this.api.getHomeWork(5, 2);
-    this.setState({
-        data: homeworks.data,
-    });  
+  getData = async () => {
+    try{
+      const grade = await AsyncStorage.getItem('GradeId');
+      const section = await AsyncStorage.getItem('SectionId');
+      const homeworks = await this.api.getHomeWork(Number(grade), Number(section));
+
+      this.setState({
+          data: homeworks.data,
+      }); 
+    }catch(err){
+      console.error(err);
+    }
+     
   }
 
   componentDidMount(){

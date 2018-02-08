@@ -37,12 +37,13 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
   //
   const doLogin = (username, password) => api.post(`/login`, { username: username, password: password} )
   const getStudent = (username) => api.get(`/student/${username}$`)
-  const getStudentData = (student) => api.get(`student/data/${student}`)
+  const getStudentData = (student) => api.get(`student/${student}/data`)
   const getStudents = (username) => api.get(`/students/${username}`)
   const getHomeWork = (grade, section) => api.get(`/homework/${grade}.${section}`)
   const getNews = () => api.get(`/news`)
   const getPayments = (grade, plancod) => api.get(`/payments/${grade}.${plancod}`)
   const getGrades = (grade, section, student, partial) => api.get(`/grades/${grade}.${section}.${student}.${partial}`)
+  const getAverage = (grade, section, student, partial) => api.get(`/grades/average/${grade}.${section}.${student}.${partial}`)
 
   // ------
   // STEP 3
@@ -65,7 +66,8 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
     getHomeWork,
     getNews,
     getPayments,
-    getGrades
+    getGrades,
+    getAverage
   }
 }
 
