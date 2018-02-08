@@ -60,8 +60,8 @@ class ListNews extends React.Component {
 
   componentDidMount(){
     //this.getData();
-    //this.getDataLocal();
-    this.getAxiosData();
+    this.getDataLocal();
+    //this.getAxiosData();
   }
 
   _renderItem = ({ item }) => {

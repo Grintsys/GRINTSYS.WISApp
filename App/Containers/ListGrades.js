@@ -53,15 +53,6 @@ class ListGrades extends React.Component {
     //this.getDataLocal();
   }
 
-  /*
-        <ListItem 
-         style={{ justifyContent: "space-between" }}>
-        <Text>{item.Description}</Text>
-        <Text note>{item.Subject}</Text>
-      </ListItem>
-  
-  */
-
   _renderItem = ({ item }) => {
     return (
       <ListItem>
@@ -77,22 +68,6 @@ class ListGrades extends React.Component {
       </ListItem>
     );
   };
-
-  /*
-  
-          <Header>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body style={{ flex: 3 }}>
-            <Title>Tareas</Title>
-          </Body>
-          <Right />
-        </Header>
-  
-  */
 
   render() {
     return (

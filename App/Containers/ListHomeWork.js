@@ -25,6 +25,8 @@ class ListHomeWork extends React.Component {
     try{
       const grade = await AsyncStorage.getItem('GradeId');
       const section = await AsyncStorage.getItem('SectionId');
+
+      debugger;
       const homeworks = await this.api.getHomeWork(Number(grade), Number(section));
 
       this.setState({
