@@ -27,6 +27,7 @@ class ListGrades extends React.Component {
   //grado, seccion, codigoalumno, parcial
   getData = async () => {
     try {
+      //debugger;
       const grade = await AsyncStorage.getItem('GradeId');
       const section = await AsyncStorage.getItem('SectionId');
       const student = await AsyncStorage.getItem('StudentCode');

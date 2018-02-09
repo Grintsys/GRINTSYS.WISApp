@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList } from "react-native";
+import { FlatList, AsyncStorage } from "react-native";
 import { List, ListItem, Content, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons'
 import API from "../Services/Api"
@@ -21,23 +21,32 @@ class ListFinances extends React.Component {
     this.api = API.create()
   }
 
-  getData = async () =>{
-    const homeworks = await this.api.getHomeWork(5, 2);
-    this.setState({
-        data: homeworks.data,
-    });  
+  getData = async () => {
+    try {
+      const grade = await AsyncStorage.getItem('GradeId');
+      const payments = await this.api.getPayments(Number(grade), 1);
+
+      if(payments.data.success === true){
+        this.setState({
+            data: payments.data.payments,
+            TotalDue: payments.data.TotalDue,
+        });
+      }
+    } catch(err){
+      console.error(err);
+    }
   }
 
   getDataLocal(){
     const data = require("../Fixtures/payments.json");
     this.setState({
-      data: data,
+      data: data.payments,
     })
   }
 
   componentDidMount(){
-    //this.getData();
-    this.getDataLocal();
+    this.getData();
+    //this.getDataLocal();
   }
 
   /*
@@ -85,9 +94,9 @@ class ListFinances extends React.Component {
       <Container>
         <Content>
           <Button block bordered>
-              <Text>Valor Adeudado: {this.state.data.TotalDue}</Text>
+              <Text>Valor Adeudado: {this.state.TotalDue}</Text>
           </Button>
-        <FlatList data={this.state.data.Payments} 
+        <FlatList data={this.state.data} 
                   keyExtractor={(item, index) => index} 
                   renderItem={this._renderItem} />
         </Content>
