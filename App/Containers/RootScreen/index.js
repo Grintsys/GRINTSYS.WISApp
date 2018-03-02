@@ -38,11 +38,11 @@ export class LoginAnimation extends Component {
     if(response.data.success === true){
 
       var users = response.data.users;
-      var studentcode = String(users[0].AluCodigo);
-      this.getStudentData(studentcode);
+      var studentcode = String(users[0].StudentCode);
 
       try{
 
+        this.getStudentData(studentcode);
         //await AsyncStorage.setItem('Users', JSON.stringify(users));
         await AsyncStorage.setItem('StudentCode', studentcode);
 
@@ -59,6 +59,8 @@ export class LoginAnimation extends Component {
   }
 
   getStudentData = async (student) =>{
+
+    console.log(`getStudentData(${student})`);
     const response = await this.api.getStudentData(student);
 
     if(response.data.success === true)

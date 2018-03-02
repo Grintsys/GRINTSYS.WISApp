@@ -31,6 +31,8 @@ class ListGrades extends React.Component {
       const grade = await AsyncStorage.getItem('GradeId');
       const section = await AsyncStorage.getItem('SectionId');
       const student = await AsyncStorage.getItem('StudentCode');
+
+      console.log(`grade: ${grade} - section: ${section} - student: ${student}`);
       const grades = await this.api.getGrades(Number(grade), Number(section), Number(student), 1);
       const average = await this.api.getAverage(Number(grade), Number(section), Number(student), 1);
       this.setState({
