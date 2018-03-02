@@ -4,7 +4,8 @@ import LaunchScreen from '../Containers/LaunchScreen'
 import TabNavigation from '../Containers/TabNavigation'
 import FooterNavigation from '../Containers/FooterTabNavigation'
 import ListFinances from '../Containers/ListFinances'
-import RootScreen from '../Containers/RootScreen/index'
+import RootScreen from '../Containers/RootScreen'
+import TestScreen from '../Containers/GradesScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -16,6 +17,7 @@ const PrimaryNav = StackNavigator({
   FooterNavigation: { screen: FooterNavigation},
   ListFinances: { screen: ListFinances},
   RootScreen: { screen: RootScreen },
+  TestScreen: { screen: TestScreen },
 }, {
   // Default config for all screens
   headerMode: 'none',

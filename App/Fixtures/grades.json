@@ -1,68 +1,16 @@
 {
-  "Average": 95.6,
-  "Parcial": 1,
-  "Grades":
-  [{
-    "Subject":"ESPAÑOL",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":99.0,
-    "Exam":59,
-    "WorkInClass": 20,
-    "WorkInHome": 20
-  },
-  {
-    "Subject":"MATEMATICAS",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":98.0,
-    "Exam":58,
-    "WorkInClass": 20,
-    "WorkInHome": 20
-  },
-  {
-    "Subject":"CIENCIAS",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":80.0,
-    "Exam":60,
-    "WorkInClass": 10,
-    "WorkInHome": 10
-  },
-  {
-    "Subject":"CHINO MANDARIN",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":91.0,
-    "Exam":55,
-    "WorkInClass": 20,
-    "WorkInHome": 16
-  },
-  {
-    "Subject":"ESTUDIOS SOCIALES",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":90.0,
-    "Exam":50,
-    "WorkInClass": 20,
-    "WorkInHome": 20
-  },
-  {
-    "Subject":"ACTIVIDADES PRACTICAS",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":89.0,
-    "Exam":49,
-    "WorkInClass": 20,
-    "WorkInHome": 20
-  },
-  {
-    "Subject":"INGLES",
-    "Grade":"TERCERO",
-    "Parcial": 1,
-    "Total":99.0,
-    "Exam":59,
-    "WorkInClass": 20,
-    "WorkInHome": 20
-  }]
-}
+  "success":true,
+  "grades":[
+    {
+      "Clase":"ESPAÑOL",
+      "Total":100,
+      "Examen":30,
+      "TrabajoAula":40,
+      "TrabajoClase":30,
+      "Nivelacion":0,
+      "GraCodigo":6,
+      "SeccCodigo":1,
+      "AluCodigo":2015192,
+      "Parcial":1
+    },
+      {"Clase":"ESTUDIOS SOCIALES","Total":100,"Examen":30,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"SOCIAL STUDIES","Total":99,"Examen":29,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"HEALTH AND SCIENCE","Total":95,"Examen":25,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"GRAMMAR","Total":95,"Examen":28,"TrabajoAula":38,"TrabajoClase":29,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"READING","Total":99,"Examen":30,"TrabajoAula":40,"TrabajoClase":29,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"SPELLING","Total":97,"Examen":29,"TrabajoAula":38,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"ORIENTACION ESPIRITUAL","Total":100,"Examen":30,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"PHYSICAL EDUCATION","Total":98,"Examen":28,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"INFORMATION TECHNOLOGY","Total":95,"Examen":25,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"MATHEMATICS","Total":97,"Examen":28,"TrabajoAula":39,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"PERSONALIDAD","Total":0,"Examen":0,"TrabajoAula":0,"TrabajoClase":0,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"PHONICS","Total":97,"Examen":28,"TrabajoAula":40,"TrabajoClase":29,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"ROBOTICS","Total":98,"Examen":28,"TrabajoAula":40,"TrabajoClase":30,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1},{"Clase":"CHINESE MANDARIN L1","Total":0,"Examen":0,"TrabajoAula":0,"TrabajoClase":0,"Nivelacion":0,"GraCodigo":6,"SeccCodigo":1,"AluCodigo":2015192,"Parcial":1}]}

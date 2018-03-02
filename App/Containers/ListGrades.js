@@ -77,6 +77,13 @@ class ListGrades extends React.Component {
       <Container>
         <Content>
          
+          <Button iconCenter light>
+            <Icon name='arrow-up' />
+          </Button>
+          <Button iconCenter light>
+            <Icon name='arrow-down' />
+          </Button>
+
           <Button block bordered>
               <Text>Promedio: {this.state.average}</Text>
           </Button>
