@@ -8,6 +8,14 @@ import FJSON from 'format-json'
 
 class ListHomeWork extends React.Component {
 
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+    
+    return {
+      title: params ? params.otherParam : 'A Nested Details Screen',
+    }
+  };
+
   api = {}
 
   constructor(props){
@@ -42,14 +50,9 @@ class ListHomeWork extends React.Component {
     this.getData();
   }
 
-  /*
-        <ListItem 
-         style={{ justifyContent: "space-between" }}>
-        <Text>{item.Description}</Text>
-        <Text note>{item.Subject}</Text>
-      </ListItem>
-  
-  */
+  onNavigationDrawer = () => {
+    this.props.navigation.navigate("SwitchStudent")
+  }
 
   _renderItem = ({ item }) => {
     return (
@@ -66,22 +69,6 @@ class ListHomeWork extends React.Component {
       </ListItem>
     );
   };
-
-  /*
-  
-          <Header>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body style={{ flex: 3 }}>
-            <Title>Tareas</Title>
-          </Body>
-          <Right />
-        </Header>
-  
-  */
 
   render() {
     return (

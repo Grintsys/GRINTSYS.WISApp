@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native'
 
 import AuthScreen from '../AuthScreen'
 //import HomeScreen from '../HomeScreen'
-import HomeScreen from '../../Containers/FooterTabNavigation'
+//import HomeScreen from '../../Containers/FooterTabNavigation'
 
 import API from "../../Services/Api"
 import FJSON from 'format-json'
@@ -49,6 +49,8 @@ export class LoginAnimation extends Component {
       }catch(err){
         console.log(err);
       }
+
+      this.props.navigation.navigate('TabNavigation');
     }
 
     this.setState({
@@ -104,7 +106,7 @@ export class LoginAnimation extends Component {
         />
       )
     */
-  render () {
+  /*render () {
     if (this.state.isAppReady) {
       return (
         <HomeScreen />
@@ -120,7 +122,20 @@ export class LoginAnimation extends Component {
           onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
         />
       )
-    }
+    } 
+  }*/
+
+  render () {
+    return (
+        <AuthScreen
+          login={this._doLogin}
+          signup={this._doSignup}
+          isLoggedIn={this.state.isLoggedIn}
+          isLoading={this.state.isLoading}
+          errorMessage={this.state.errorMessage}
+          onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
+        />
+    )
   }
 }
 

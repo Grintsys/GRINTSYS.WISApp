@@ -5,23 +5,25 @@ import rootSaga from '../Sagas/'
 import ReduxPersist from '../Config/ReduxPersist'
 
 /* ------------- Assemble The Reducers ------------- */
-export const reducers = combineReducers({
-  nav: require('./NavigationRedux').reducer,
-  github: require('./GithubRedux').reducer,
-  search: require('./SearchRedux').reducer
-})
 
 export default () => {
-  let finalReducers = reducers
+
+  const reducers = combineReducers({
+    nav: require('./NavigationRedux').reducer,
+    //github: require('./GithubRedux').reducer,
+    //search: require('./SearchRedux').reducer
+  })
+
+  //let finalReducers = reducers
   // If rehydration is on use persistReducer otherwise default combineReducers
-  if (ReduxPersist.active) {
+  /*if (ReduxPersist.active) {
     const persistConfig = ReduxPersist.storeConfig
     finalReducers = persistReducer(persistConfig, reducers)
-  }
+  }*/
 
-  let { store, sagasManager, sagaMiddleware } = configureStore(finalReducers, rootSaga)
+  let { store, sagasManager, sagaMiddleware } = configureStore(reducers, rootSaga)
 
-  if (module.hot) {
+  /*if (module.hot) {
     module.hot.accept(() => {
       const nextRootReducer = require('./').reducers
       store.replaceReducer(nextRootReducer)
@@ -32,7 +34,7 @@ export default () => {
         sagasManager = sagaMiddleware.run(newYieldedSagas)
       })
     })
-  }
+  }*/
 
   return store
 }

@@ -22,6 +22,12 @@ export default class Calendar extends Component {
     this.api = API.create();
   }
 
+  static navigationOptions = {
+    headerMode: 'none',
+    title: 'Home',
+    /* No more header config here! */
+  };
+
   render() {
     return (
       <Agenda

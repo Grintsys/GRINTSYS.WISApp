@@ -1,36 +1,43 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react'
 import { FlatList } from "react-native";
-import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, } from "native-base";
+//import { connect } from "react-redux";
+import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading, 
+  Icon, Text, Button, Badge, Right, Left, Body, Title} from "native-base";
 
-import Tab1 from "./ListHomeWork";
-import Tab2 from "./ListHomeWork";
-import Tab3 from "./LaunchScreen";
+import Tab1 from "./TestScreen"
+import SwitchStudent from './SwitchStudentScreen';
+import Styles from "./Styles/FooterTabStyles";
 
-class TabNavigation extends React.Component {
+export default class TabNavigation extends Component {
+
+  onSwitchStudentAccount = () => {
+    this.props.navigation.navigate('SwitchStudent')
+  }
+
+  onNavigationDrawer = () => {
+    this.props.navigation.navigate("DrawerStack")
+  }
+
+  //Tab 1 temporal backup
+  /*
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon active name="ios-paper-outline" />
+          </TabHeading>}>
+           <Tab1 /> 
+          </Tab>
+  */
+
   render() {
     return (
       <Container>
-        <Header hasTabs/>
-        <Tabs>
-          <Tab heading={ <TabHeading><Icon name='camera' /><Text>Camera</Text></TabHeading>}>
-            <Tab1 />
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-            <Tab2 />
-          </Tab>
-          <Tab heading={ <TabHeading><Icon name='apps' /></TabHeading>}>
-            <Tab3 />
-          </Tab>
-        </Tabs>
+        <Tabs tabBarPosition= "bottom" initialPage={0} ref={(tabview) => { this.tabview = tabview }} tabBarUnderlineStyle={{opacity: 0, backgroundColor: "transparent",}}>
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon active name="ios-paper-outline" />
+          </TabHeading>}>
+           <Tab1 /> 
+          </Tab>     
+        </Tabs>     
       </Container>
-    );
+    )
   }
 }
-const mapStateToProps = state => {
-  return {
-    // ...redux state to props here
-  };
-};
-
-export default connect(mapStateToProps)(TabNavigation);

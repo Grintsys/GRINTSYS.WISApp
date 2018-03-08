@@ -1,55 +1,39 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { StackNavigator } from 'react-navigation';
 import { FlatList } from "react-native";
+import { connect } from "react-redux";
 import { Container, Content, Header, Footer, FooterTab, Tab, Tabs, TabHeading, 
   Icon, Text, Button, Badge, Right, Left, Body, Title} from "native-base";
-
-//import Tab1 from "./ListNews";
 
 import Tab1 from "./NewsScreen"
 import Tab2 from "./ListHomeWork";
 import Tab3 from "./CalendarScreen";
 import Tab4 from "./GradesScreen";
-import Tab5 from "./ListFinances";
+import Tab5 from "./FinancesScreen";
+import SwitchStudent from './SwitchStudentScreen';
 import Styles from "./Styles/FooterTabStyles";
 
-/*
- <Footer>
-          <FooterTab>
-            <Button badge vertical active onPress={() => this.tabview.goToPage(0)}>
-              <Badge><Text>2</Text></Badge>
-              <Icon active name="ios-paper-outline" />
-              <Text style={Styles.footerText}>Noticias</Text>
-            </Button>
-            <Button badge vertical onPress={() => this.tabview.goToPage(1)}>
-              <Badge ><Text>9</Text></Badge>
-              <Icon name="ios-clock-outline" />
-              <Text style={Styles.footerText}>Tareas</Text>
-            </Button>
-            <Button badge vertical onPress={() => this.tabview.goToPage(2)}>
-              <Badge ><Text>6</Text></Badge>
-              <Icon name="ios-calendar-outline" />
-              <Text style={Styles.footerText}>Calendario</Text>
-            </Button>
-            <Button vertical onPress={() => this.tabview.goToPage(3)}>
-              <Icon name="md-stats" />
-              <Text style={Styles.footerText}>Notas</Text>
-            </Button>
-            <Button vertical onPress={() => this.tabview.goToPage(4)}>
-              <Icon name="logo-usd" />
-              <Text style={Styles.footerText}>Finanzas</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-
-*/
 class FooterTabNavigation extends React.Component {
-  render() {
-    return (
-      <Container>
+
+  onSwitchStudentAccount = () => {
+    this.props.navigation.navigate('SwitchStudent')
+  }
+
+  onOpenDrawer = () => {
+    this.props.navigation.navigate('DrawerStack')
+  }
+
+  //Tab 1 temporal backup
+  /*
+          <Tab style={{elevation: 0}} heading={ <TabHeading>
+            <Icon active name="ios-paper-outline" />
+          </TabHeading>}>
+           <Tab1 />
+          </Tab>
+
         <Header iosBarStyle="light-content">
           <Left>
-              <Button transparent>
+              <Button transparent onPress={this.onOpenDrawer}>
                 <Icon name='menu' />
               </Button>
           </Left>
@@ -57,17 +41,17 @@ class FooterTabNavigation extends React.Component {
             <Title>WIS</Title>
           </Body>
           <Right>
-            <Button transparent>
-              <Text style={Styles.headerText}>Cambiar</Text>
+            <Button transparent onPress={this.onSwitchStudentAccount}>
+              <Icon name='ios-repeat' />
             </Button>
           </Right>
         </Header>
+  */
+
+  render() {
+    return (
+      <Container>
         <Tabs tabBarPosition= "bottom" initialPage={0} ref={(tabview) => { this.tabview = tabview }} tabBarUnderlineStyle={{opacity: 0, backgroundColor: "transparent",}}>
-          <Tab style={{elevation: 0}} heading={ <TabHeading>
-            <Icon active name="ios-paper-outline" />
-          </TabHeading>}>
-           <Tab1 />
-          </Tab>
           <Tab style={{elevation: 0}} heading={ <TabHeading>
             <Icon name="ios-clock-outline" />
           </TabHeading>}>

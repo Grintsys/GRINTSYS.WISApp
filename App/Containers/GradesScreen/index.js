@@ -10,6 +10,10 @@ import Styles from '../Styles/HeaderTabStyles'
 
 class ListGrades extends React.Component {
 
+  static navigationOptions = {
+    title: 'Calificaciones',
+  };
+
   api = {}
 
   constructor(props){
