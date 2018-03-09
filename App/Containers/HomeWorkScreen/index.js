@@ -11,6 +11,10 @@ class ListHomeWork extends React.Component {
         title: 'Tareas',
   };
 
+  /*static navigationOptions = ({ navigation }) => ({
+    title: `Tareas: ${navigation.state.params.StudentCode}`,
+  });*/
+
   api = {}
 
   constructor(props){
@@ -49,9 +53,10 @@ class ListHomeWork extends React.Component {
   }
 
   _renderItem = ({ item }) => {
+      //console.log(item);
     return (
       <ListItem>
-        <Thumbnail square size={80}  source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+        <Thumbnail square size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
         <Body>
           <Text>{item.Description}</Text>
           <Text note>{item.Subject}</Text>

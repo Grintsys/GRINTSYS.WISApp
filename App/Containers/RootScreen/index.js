@@ -7,6 +7,7 @@ import AuthScreen from '../AuthScreen'
 
 import API from "../../Services/Api"
 import FJSON from 'format-json'
+import { NavigationActions } from 'react-navigation';
 
 /**
  * The root component of the application.
@@ -31,6 +32,17 @@ export class LoginAnimation extends Component {
     this.api = API.create()
   }
 
+  handleHomeNavigation() {
+    /*const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate('TabStack')
+      ]
+    })
+    return () => this.props.navigation.dispatch(resetAction)*/
+    this.props.navigation.navigate('TabStack');
+  }
+
   doLogin = async (username, password) =>{
 
     const response = await this.api.doLogin(username, password);
@@ -45,12 +57,13 @@ export class LoginAnimation extends Component {
         this.getStudentData(studentcode);
         //await AsyncStorage.setItem('Users', JSON.stringify(users));
         await AsyncStorage.setItem('StudentCode', studentcode);
+        await AsyncStorage.setItem('Username', username);
 
       }catch(err){
         console.log(err);
       }
 
-      this.props.navigation.navigate('TabStack');
+      this.handleHomeNavigation();
     }
 
     this.setState({

@@ -1,16 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList, AsyncStorage } from "react-native";
+import { FlatList, AsyncStorage, TouchableOpacity } from "react-native";
 import { List, ListItem, Content, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
-import { Col, Row, Grid } from 'react-native-easy-grid';
 import API from "../../Services/Api"
 import Moment from 'moment';
 
-class ListFinances extends React.Component {
-
-  onNavigationDrawer = () => {
-    this.props.navigation.navigate('RootScreen');
-  }
+class SwitchStudents extends React.Component {
 
   api = {}
 
@@ -20,21 +15,27 @@ class ListFinances extends React.Component {
     this.state = {
       data: [],
       loading: false,
-      TotalDue: 0
     }
 
     this.api = API.create()
   }
 
-  getData = async () => {
-    try {
-      const grade = await AsyncStorage.getItem('GradeId');
-      const payments = await this.api.getPayments(Number(grade), 1);
+  onStudentNavigation = (studentCode) => {
+    this.props.navigation.navigate('TabStack', { StudentCode: String(studentCode)});
+    //this.props.navigation.navigate('TabStack');
+  }
 
-      if(payments.data.success === true){
+  getData = async () => {
+    //debugger;
+    try {
+      const username = await AsyncStorage.getItem('Username');
+      const students = await this.api.getStudents(username);
+
+      if(students.data.success === true){
+
+        console.log(students.data.users);
         this.setState({
-            data: payments.data.payments,
-            TotalDue: payments.data.TotalDue,
+            data: students.data.users,
         });
       }
     } catch(err){
@@ -43,52 +44,43 @@ class ListFinances extends React.Component {
   }
 
   getDataLocal(){
-    const data = require("../../Fixtures/payments.json");
+    const data = require("../../Fixtures/students.json");
     this.setState({
-      data: data.payments,
+      data: data.users,
     })
   }
 
   componentDidMount(){
-    //this.getData();
-    this.getDataLocal();
+    this.getData();
+    //this.getDataLocal();
   }
 
   _renderItem = ({ item }) => {
-    Moment.locale('en');
-    var dt = item.Date;
+    //console.log(item);
         return (
-            <ListItem icon>
-                <Left><Icon name="ios-calendar-outline" /></Left>
-                <Body>
-                <Text>{item.Description}</Text>
-                <Text note>{Moment(dt).format('MM-DD-YYYY')}</Text>
-                </Body> 
-                <Right>
-                <Text>{item.Total} LPS</Text>    
-                <Button transparent onPress={this.onNavigationDrawer}>
-                <Icon name="ios-close" /> 
-                </Button>    
-                </Right>
+          <TouchableOpacity onPress={()=>{this.onStudentNavigation(item)}}>
+            <ListItem>
+            <Thumbnail size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+            <Body>
+              <Text>{item.StudentCode}</Text>
+              <Text note>{item.Name}</Text>
+            </Body> 
+            <Right>
+              <Button transparent>
+                <Icon name="ios-arrow-forward" />
+              </Button>
+            </Right>
             </ListItem>
+          </TouchableOpacity>
         );
   };
 
   render() {
     return (
       <Container>
-        <Content contentContainerStyle={{flex: 1}}>
-            <Grid>
-                <Row style={{ backgroundColor: '#635DB7', height: 70}}>
-                    <Text style={{ paddingLeft: 25, paddingTop: 20, fontSize: 24, color: 'white' }}>Saldo pendiente: {this.state.TotalDue}</Text>
-                </Row>
-                <Row>
-                    <FlatList data={this.state.data} 
-                        keyExtractor={(item, index) => index} 
-                        renderItem={this._renderItem} />
-                </Row>
-            </Grid>
-        </Content>
+            <FlatList data={this.state.data} 
+                      keyExtractor={(item, index) => index} 
+                      renderItem={this._renderItem} />
       </Container>
     );
   }
@@ -99,4 +91,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ListFinances);
+export default connect(mapStateToProps)(SwitchStudents);

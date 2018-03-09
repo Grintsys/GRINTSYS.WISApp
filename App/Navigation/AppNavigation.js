@@ -70,9 +70,15 @@ const TabStack =  StackNavigator({
     headerMode: 'screen',
     navigationOptions: ({navigation}) => ({
       params: navigation.state.params,
+      headerTintColor: '#ffffff',
+      headerStyle: {
+        backgroundColor: '#2196F3',
+        borderBottomColor: '#2196F3',
+        borderBottomWidth: 1,
+      },
       headerRight: (
         <Button transparent onPress={() => navigation.navigate("SwitchStudent")}>
-            <Icon name='ios-people' />
+            <Icon name='ios-people' style={{color: 'white'}} />
         </Button>
       )
     })
