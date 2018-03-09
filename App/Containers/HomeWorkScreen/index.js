@@ -2,11 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { FlatList, AsyncStorage } from "react-native";
 import { List, ListItem, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
-// import Icon from 'react-native-vector-icons/Ionicons'
-import API from "../Services/Api"
+import API from "../../Services/Api"
 import FJSON from 'format-json'
 
 class ListHomeWork extends React.Component {
+
+  static navigationOptions = {
+        title: 'Tareas',
+  };
 
   api = {}
 
@@ -34,7 +37,7 @@ class ListHomeWork extends React.Component {
       }); 
     }catch(err){
       console.error(err);
-    }    
+    } 
   }
 
   componentDidMount(){

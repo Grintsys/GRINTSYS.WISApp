@@ -7,8 +7,13 @@ import {
 import {Agenda} from 'react-native-calendars';
 import API from '../../Services/CalendarApi'
 import Secrets from 'react-native-config'
+import { connect } from "react-redux";
 
-export default class Calendar extends Component {
+class Calendar extends Component {
+
+  static navigationOptions = {
+    title: 'Calendario',
+  };
 
   api = {}
 
@@ -21,12 +26,6 @@ export default class Calendar extends Component {
 
     this.api = API.create();
   }
-
-  static navigationOptions = {
-    headerMode: 'none',
-    title: 'Home',
-    /* No more header config here! */
-  };
 
   render() {
     return (
@@ -160,3 +159,11 @@ const styles = StyleSheet.create({
     paddingTop: 30
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    // ...redux state to props here
+  };
+};
+
+export default connect(mapStateToProps)(Calendar);

@@ -8,6 +8,10 @@ import Moment from 'moment';
 
 class ListFinances extends React.Component {
 
+  static navigationOptions = {
+    title: 'Pagos',
+  };
+
   api = {}
 
   constructor(props){
@@ -90,7 +94,7 @@ class ListFinances extends React.Component {
       <Container>
         <Content contentContainerStyle={{flex: 1}}>
             <Grid>
-                <Row style={{ backgroundColor: '#635DB7', height: 70}}>
+                <Row style={{ backgroundColor: '#2196F3', height: 70}}>
                     <Text style={{ paddingLeft: 25, paddingTop: 20, fontSize: 24, color: 'white' }}>Saldo pendiente: {this.state.TotalDue}</Text>
                 </Row>
                 <Row>

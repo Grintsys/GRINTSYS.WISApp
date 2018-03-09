@@ -1,52 +1,99 @@
 import React from "react"
 import { Text } from 'react-native'
-import { StackNavigator, DrawerNavigator } from "react-navigation"
-import ListHomeWork from '../Containers/ListHomeWork'
-import LaunchScreen from '../Containers/LaunchScreen'
-import TabNavigation from '../Containers/FooterTabNavigation'
-import ListFinances from '../Containers/ListFinances'
+import { StackNavigator, DrawerNavigator, TabNavigator } from "react-navigation"
+import { Button, Icon } from 'native-base'
+
+//import LaunchScreen from '../Containers/LaunchScreen'
+//import TabNavigation from '../Containers/FooterTabNavigation'
+
+//Login
 import RootScreen from '../Containers/RootScreen'
+
+//tab navigation
+import Tareas from '../Containers/HomeWorkScreen'
+import Pagos from '../Containers/FinancesScreen'
+import Calendario from "../Containers/CalendarScreen";
+import Notas from "../Containers/GradesScreen";
+
+// Drawer Navigation
 import SwitchStudent from '../Containers/SwitchStudentScreen'
 import TestScreen from '../Containers/TestScreen'
 
 import styles from './Styles/NavigationStyles'
 
 const DrawerStack = DrawerNavigator({
-  Login: { screen: RootScreen },
   Accounts: { screen: SwitchStudent },
-  Content: { screen: TabNavigation },
+  //Login: { screen: RootScreen },
+})
+  
+const TabNav = TabNavigator({
+    Tareas: {
+      screen: Tareas, 
+      navigationOptions: {
+        tabBarLabel: 'Tareas',
+        tabBarIcon: ({ tintColor }) => <Icon name="ios-clock-outline" size={35} color={tintColor} />
+      },
+    },
+    Calendario: {
+      screen: Calendario, 
+      navigationOptions: {
+        tabBarLabel: 'Calendario',
+        tabBarIcon: ({ tintColor }) => <Icon name="ios-calendar-outline" size={35} color={tintColor} />
+      },
+    },
+    Notas: {
+      screen: Notas, // Replaced Feed with FeedStack
+      navigationOptions: {
+        tabBarLabel: 'Notas',
+        tabBarIcon: ({ tintColor }) => <Icon name="md-stats" size={35} color={tintColor} />
+      },
+    },
+    Pagos: {
+      screen: Pagos, // Replaced Feed with FeedStack
+      navigationOptions: {
+        tabBarLabel: 'Pagos',
+        tabBarIcon: ({ tintColor }) => <Icon name="logo-usd" size={35} color={tintColor} />
+      },
+    }
+  },
+    {
+      animationEnabled: true,
+      swipeEnabled: true,
+    });  
+
+const TabStack =  StackNavigator({
+  TabStack: { screen: TabNav },
+  SwitchStudent: { screen: SwitchStudent },
+  //DrawerStack: { screen: DrawerStack },
+},
+  {
+    headerMode: 'screen',
+    navigationOptions: ({navigation}) => ({
+      params: navigation.state.params,
+      headerRight: (
+        <Button transparent onPress={() => navigation.navigate("SwitchStudent")}>
+            <Icon name='ios-people' />
+        </Button>
+      )
+    })
 })
 
-const DrawerNavigation = StackNavigator({
-  DrawerStack: { screen: DrawerStack }
-}, {
-  headerMode: 'float',
-  navigationOptions: ({navigation}) => ({
-    title: 'Logged In to your app!',
-    headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-  })
-})
+/*
+      headerLeft: (
+        <Button transparent>
+            <Icon name='menu' />
+        </Button>
+      ),
+*/
 
-const LoginStack = StackNavigator(
-  {
-    LoginScreen: { screen: RootScreen },
-  }, 
-  {
-    headerMode: 'none',
-  })
-
-// Manifest of possible screens
 const PrimaryNav = StackNavigator(
 {
-    LoginStack: { screen: LoginStack },
-    SwitchStudent: { screen: SwitchStudent },
-    TestScreen: { screen: TestScreen },
-    DrawerStack: { screen: DrawerNavigation },
-    TabNavigation: { screen: TabNavigation },
+    LoginStack: { screen: RootScreen },
+    TabStack: { screen: TabStack },
+    //DrawerStack: { screen: DrawerStack },
 }, {
-      //headerMode: 'none',
-      title: 'Main',
-      initialRouteName: 'LoginStack'
+      headerMode: 'none',
+      initialRouteName: 'LoginStack',
 })
 
 export default PrimaryNav;

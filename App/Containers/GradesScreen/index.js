@@ -11,7 +11,7 @@ import Styles from '../Styles/HeaderTabStyles'
 class ListGrades extends React.Component {
 
   static navigationOptions = {
-    title: 'Calificaciones',
+    title: 'Notas',
   };
 
   api = {}
@@ -104,7 +104,7 @@ class ListGrades extends React.Component {
       <Container>
         <Content contentContainerStyle={{flex: 1}}>
             <Grid style={{  }}>
-                <Row style={{ backgroundColor: '#635DB7', height: 70, padding: 15, justifyContent: 'space-between' }}>
+                <Row style={{ backgroundColor: '#2196F3', height: 70, padding: 15, justifyContent: 'space-between' }}>
                     <Button iconCenter light onPress={this.onBackPartial.bind(this)}>
                         <Icon name='arrow-back' />
                     </Button>
@@ -113,7 +113,7 @@ class ListGrades extends React.Component {
                         <Icon name='arrow-forward' />
                     </Button>
                 </Row>
-                <Row style={{ backgroundColor: '#635DB7', height: 50, paddingLeft: 25}}>
+                <Row style={{ backgroundColor: '#2196F3', height: 50, paddingLeft: 25}}>
                     <Col style={{ alignContent: 'center' }}>
                         <Text style={{ fontSize: 24, color: 'white' }}>{this.state.average} - Promedio</Text>
                     </Col>

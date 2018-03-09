@@ -50,7 +50,7 @@ export class LoginAnimation extends Component {
         console.log(err);
       }
 
-      this.props.navigation.navigate('TabNavigation');
+      this.props.navigation.navigate('TabStack');
     }
 
     this.setState({
