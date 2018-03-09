@@ -1,4 +1,4 @@
-app_identifier("com.grintsys.WISApp") # The bundle identifier of your app
+app_identifier("com.grintsys.WIS") # The bundle identifier of your app
 apple_id("app@wis.edu.hn") # Your Apple email address
 
 itc_team_id "118925676" # iTunes Connect Team ID
