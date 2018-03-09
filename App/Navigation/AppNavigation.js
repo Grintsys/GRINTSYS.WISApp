@@ -27,18 +27,18 @@ const DrawerStack = DrawerNavigator({
 })
   
 const TabNav = TabNavigator({
-    Tareas: {
-      screen: Tareas, 
-      navigationOptions: {
-        tabBarLabel: 'Tareas',
-        tabBarIcon: ({ tintColor }) => <Icon name="ios-clock-outline" size={35} color={tintColor} />
-      },
-    },
     Calendario: {
       screen: Calendario, 
       navigationOptions: {
         tabBarLabel: 'Calendario',
         tabBarIcon: ({ tintColor }) => <Icon name="ios-calendar-outline" size={35} color={tintColor} />
+      },
+    },
+    Tareas: {
+      screen: Tareas, 
+      navigationOptions: {
+        tabBarLabel: 'Tareas',
+        tabBarIcon: ({ tintColor }) => <Icon name="ios-clock-outline" size={35} color={tintColor} />
       },
     },
     Notas: {

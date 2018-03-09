@@ -41,7 +41,7 @@ export default class LoginForm extends Component {
           <CustomTextInput
             name={'email'}
             ref={(ref) => this.emailInputRef = ref}
-            placeholder={'Email'}
+            placeholder={'Usuario'}
             keyboardType={'email-address'}
             editable={!isLoading}
             returnKeyType={'next'}
@@ -54,7 +54,7 @@ export default class LoginForm extends Component {
           <CustomTextInput
             name={'password'}
             ref={(ref) => this.passwordInputRef = ref}
-            placeholder={'Password'}
+            placeholder={'Contraseña'}
             editable={!isLoading}
             returnKeyType={'done'}
             secureTextEntry={true}
