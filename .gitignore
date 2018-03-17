@@ -39,7 +39,6 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-*.keystore
 
 # fastlane
 #
@@ -55,3 +54,7 @@ buck-out/
 # Misc
 #
 .env
+
+# publish files
+*.keystore
+*.p12
