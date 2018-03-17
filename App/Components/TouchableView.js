@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, View, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
+import { Platform, View, TouchableNativeFeedback, TouchableOpacity, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
 
 const IS_ANDROID = Platform.OS === 'android'
@@ -26,7 +26,7 @@ TouchableView.propTypes = {
   isRippleDisabled: PropTypes.bool,
   rippleColor: PropTypes.string,
   children: PropTypes.any,
-  style: View.propTypes.style
+  style: ViewPropTypes.style
 }
 
 export default TouchableView
