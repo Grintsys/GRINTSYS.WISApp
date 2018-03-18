@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 
 import AuthScreen from '../AuthScreen'
-//import HomeScreen from '../HomeScreen'
-//import HomeScreen from '../../Containers/FooterTabNavigation'
 
 import API from "../../Services/Api"
 import FJSON from 'format-json'
@@ -25,22 +23,39 @@ export class LoginAnimation extends Component {
     errorMessage: '' //is a login fail
   }
 
-
   constructor(props){
     super(props)
 
     this.api = API.create()
   }
 
-  handleHomeNavigation() {
-    /*const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate('TabStack')
-      ]
-    })
-    return () => this.props.navigation.dispatch(resetAction)*/
-    this.props.navigation.navigate('TabStack');
+  //handle login session
+  onSessionLogin = async () => {
+    try{
+      const studentCode = await AsyncStorage.getItem('StudentCode');
+      const grade = await AsyncStorage.getItem('GradeId');
+      const section = await AsyncStorage.getItem('SectionId');
+      const username = await AsyncStorage.getItem('Username');
+
+      if(studentCode != null && grade != null && section != null && username != null){
+        this.handleHomeNavigation(studentCode, username, grade, section);
+      }
+    }catch(err){
+      console.error(`error on RootScreen: ${err}`)
+    }
+  }
+
+  componentDidMount(){
+    this.onSessionLogin();  
+  }
+
+  handleHomeNavigation = (studentcode, username, grade, section) => {
+    this.props.navigation.navigate('TabStack', {
+      StudentCode: studentcode, 
+      Username: username,
+      GradeId: grade,
+      SectionId: section
+    });
   }
 
   doLogin = async (username, password) =>{
@@ -54,16 +69,25 @@ export class LoginAnimation extends Component {
 
       try{
 
-        this.getStudentData(studentcode);
-        //await AsyncStorage.setItem('Users', JSON.stringify(users));
         await AsyncStorage.setItem('StudentCode', studentcode);
         await AsyncStorage.setItem('Username', username);
 
-      }catch(err){
-        console.log(err);
-      }
+        const studentdata = await this.api.getStudentData(studentcode);
 
-      this.handleHomeNavigation();
+        if(studentdata.data.success === true)
+        {
+            var grade = String(studentdata.data.data.GradeId);
+            var section = String(studentdata.data.data.SectionId);
+
+            await AsyncStorage.setItem('GradeId', grade);
+            await AsyncStorage.setItem('SectionId', section);
+
+            this.handleHomeNavigation(studentcode, username, grade, section);
+        }
+        
+      }catch(err){
+        console.log("error on RootScreen", err);
+      }
     }
 
     this.setState({
@@ -71,26 +95,6 @@ export class LoginAnimation extends Component {
       errorMessage: response.data.message,
       isLoading: false,
     });
-  }
-
-  getStudentData = async (student) =>{
-
-    console.log(`getStudentData(${student})`);
-    const response = await this.api.getStudentData(student);
-
-    if(response.data.success === true)
-    {
-      try{
-        await AsyncStorage.setItem('GradeId', String(response.data.data.GradeId));
-        await AsyncStorage.setItem('SectionId', String(response.data.data.SectionId));
-      }catch(err){
-        console.error(err);
-      }
-    }
-    else
-    {
-      console.log(`error on getStudentData(${student})`);
-    }
   }
 
   /**
@@ -111,32 +115,6 @@ export class LoginAnimation extends Component {
    * Simple routing.
    * If the user is authenticated (isAppReady) show the HomeScreen, otherwise show the AuthScreen
    */
-
-   /**
-    * return (
-        <HomeScreen
-          logout={() => this.setState({ isLoggedIn: false, isAppReady: false })}
-        />
-      )
-    */
-  /*render () {
-    if (this.state.isAppReady) {
-      return (
-        <HomeScreen />
-      )
-    } else {
-      return (
-        <AuthScreen
-          login={this._doLogin}
-          signup={this._doSignup}
-          isLoggedIn={this.state.isLoggedIn}
-          isLoading={this.state.isLoading}
-          errorMessage={this.state.errorMessage}
-          onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
-        />
-      )
-    } 
-  }*/
 
   render () {
     return (

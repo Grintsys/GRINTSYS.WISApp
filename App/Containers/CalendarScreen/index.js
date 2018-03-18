@@ -25,6 +25,7 @@ class Calendar extends Component {
     };
 
     this.api = API.create();
+
   }
 
   render() {

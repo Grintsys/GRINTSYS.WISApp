@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList, AsyncStorage, TouchableOpacity } from "react-native";
+import { FlatList, AsyncStorage, TouchableOpacity, Alert } from "react-native";
 import { List, ListItem, Content, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 import API from "../../Services/Api"
 import Moment from 'moment';
@@ -20,26 +20,39 @@ class SwitchStudents extends React.Component {
     this.api = API.create()
   }
 
+  _onTest(studentCode){
+    //Alert.alert(studentCode);
+    console.log(`onSwitchStudentAccount: ${studentCode}`);
+    //console.log(this.props.navigation.state.params);
+
+    //this.props.navigation.goBack();
+  }
+
   onStudentNavigation = (studentCode) => {
-    this.props.navigation.navigate('TabStack', { StudentCode: String(studentCode)});
-    //this.props.navigation.navigate('TabStack');
+    console.log(`onSwitchStudentAccount: ${studentCode}`);
+    console.log(this.props.navigation.state.params);
+
+    this.props.navigation.navigate('TabStack', { 
+      StudentCode: studentCode,
+      //Username: this.props.navigation.state.params.Username,
+      //GradeId: this.props.navigation.state.params.GradeId,
+      //SectionId: this.props.navigation.state.params.SectionId
+    });
   }
 
   getData = async () => {
-    //debugger;
     try {
-      const username = await AsyncStorage.getItem('Username');
-      const students = await this.api.getStudents(username);
+      const { Username } = this.props.navigation.state.params;
+      const students = await this.api.getStudents(Username);
 
       if(students.data.success === true){
 
-        console.log(students.data.users);
         this.setState({
             data: students.data.users,
         });
       }
     } catch(err){
-      console.error(err);
+      console.error("error on SwitchStudentScreen: " + err);
     }
   }
 
@@ -52,13 +65,11 @@ class SwitchStudents extends React.Component {
 
   componentDidMount(){
     this.getData();
-    //this.getDataLocal();
   }
 
   _renderItem = ({ item }) => {
-    //console.log(item);
         return (
-          <TouchableOpacity onPress={()=>{this.onStudentNavigation(item)}}>
+          <TouchableOpacity onPress={(item) => this._onTest(item.StudentCode)}>
             <ListItem>
             <Thumbnail size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
             <Body>
@@ -79,7 +90,7 @@ class SwitchStudents extends React.Component {
     return (
       <Container>
             <FlatList data={this.state.data} 
-                      keyExtractor={(item, index) => index} 
+                      keyExtractor={(item, index) => index}
                       renderItem={this._renderItem} />
       </Container>
     );

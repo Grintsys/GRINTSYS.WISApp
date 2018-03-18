@@ -59,7 +59,7 @@ const TabNav = TabNavigator({
     {
       animationEnabled: true,
       swipeEnabled: true,
-    });  
+    });
 
 const TabStack =  StackNavigator({
   TabStack: { screen: TabNav },
@@ -77,12 +77,18 @@ const TabStack =  StackNavigator({
         borderBottomWidth: 1,
       },
       headerRight: (
-        <Button transparent onPress={() => navigation.navigate("SwitchStudent")}>
-            <Icon name='ios-people' style={{color: 'white'}} />
+          <Button transparent onPress={() => navigation.navigate("SwitchStudent", {
+            Username: navigation.state.params.Username,
+            StudentCode: navigation.state.params.StudentCode,
+            GradeId: navigation.state.params.GradeId,
+            SectionId: navigation.state.params.SectionId
+          })}>
+          <Icon name='ios-people' style={{color: 'white'}} />
         </Button>
       )
     })
 })
+
 
 /*
       headerLeft: (

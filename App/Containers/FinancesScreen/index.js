@@ -28,8 +28,8 @@ class ListFinances extends React.Component {
 
   getData = async () => {
     try {
-      const grade = await AsyncStorage.getItem('GradeId');
-      const payments = await this.api.getPayments(Number(grade), 1);
+      const { GradeId } = this.props.navigation.state.params;
+      const payments = await this.api.getPayments(Number(GradeId), 1);
 
       if(payments.data.success === true){
         this.setState({

@@ -11,10 +11,6 @@ class ListHomeWork extends React.Component {
         title: 'Tareas',
   };
 
-  /*static navigationOptions = ({ navigation }) => ({
-    title: `Tareas: ${navigation.state.params.StudentCode}`,
-  });*/
-
   api = {}
 
   constructor(props){
@@ -30,11 +26,10 @@ class ListHomeWork extends React.Component {
 
   getData = async () => {
     try{
-      const grade = await AsyncStorage.getItem('GradeId');
-      const section = await AsyncStorage.getItem('SectionId');
 
-      //debugger;
-      const homeworks = await this.api.getHomeWork(Number(grade), Number(section));
+      const { StudentCode, Username, GradeId, SectionId } = this.props.navigation.state.params;
+      
+      const homeworks = await this.api.getHomeWork(Number(GradeId), Number(SectionId));
 
       this.setState({
           data: homeworks.data,
