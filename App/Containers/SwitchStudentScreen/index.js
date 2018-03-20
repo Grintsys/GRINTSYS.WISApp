@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList, AsyncStorage, TouchableOpacity, Alert } from "react-native";
+import { AsyncStorage, TouchableOpacity, Alert } from "react-native";
 import { List, ListItem, Content, Text, View, Container, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, } from "native-base";
 import API from "../../Services/Api"
 import Moment from 'moment';
@@ -20,23 +20,14 @@ class SwitchStudents extends React.Component {
     this.api = API.create()
   }
 
-  _onTest(studentCode){
-    //Alert.alert(studentCode);
-    console.log(`onSwitchStudentAccount: ${studentCode}`);
-    //console.log(this.props.navigation.state.params);
-
-    //this.props.navigation.goBack();
-  }
-
   onStudentNavigation = (studentCode) => {
     console.log(`onSwitchStudentAccount: ${studentCode}`);
-    console.log(this.props.navigation.state.params);
 
     this.props.navigation.navigate('TabStack', { 
       StudentCode: studentCode,
-      //Username: this.props.navigation.state.params.Username,
-      //GradeId: this.props.navigation.state.params.GradeId,
-      //SectionId: this.props.navigation.state.params.SectionId
+      Username: this.props.navigation.state.params.Username,
+      GradeId: this.props.navigation.state.params.GradeId,
+      SectionId: this.props.navigation.state.params.SectionId
     });
   }
 
@@ -67,31 +58,23 @@ class SwitchStudents extends React.Component {
     this.getData();
   }
 
-  _renderItem = ({ item }) => {
-        return (
-          <TouchableOpacity onPress={(item) => this._onTest(item.StudentCode)}>
-            <ListItem>
-            <Thumbnail size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
-            <Body>
-              <Text>{item.StudentCode}</Text>
-              <Text note>{item.Name}</Text>
-            </Body> 
-            <Right>
-              <Button transparent>
-                <Icon name="ios-arrow-forward" />
-              </Button>
-            </Right>
-            </ListItem>
-          </TouchableOpacity>
-        );
-  };
-
   render() {
     return (
       <Container>
-            <FlatList data={this.state.data} 
-                      keyExtractor={(item, index) => index}
-                      renderItem={this._renderItem} />
+            <List dataArray={this.state.data}
+                  renderRow={(item) => 
+                    <ListItem buttom onPress={() => (this.onStudentNavigation(item.StudentCode))}>
+                      <Thumbnail size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+                      <Body>
+                        <Text>{item.StudentCode}</Text>
+                        <Text note>{item.Name}</Text>
+                      </Body> 
+                      <Right>
+                        <Button transparent>
+                          <Icon name="ios-arrow-forward" />
+                        </Button>
+                      </Right>
+                  </ListItem>}/>
       </Container>
     );
   }
