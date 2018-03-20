@@ -100,9 +100,9 @@ android {
     defaultConfig {
         applicationId "com.wisapp"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 4
-        versionName "1.0.3"
+        targetSdkVersion 23
+        versionCode 7
+        versionName "1.0.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
