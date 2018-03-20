@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { AsyncStorage, RefreshControl } from "react-native";
+import { AsyncStorage, RefreshControl, Alert } from "react-native";
 import { List, ListItem, Text, View, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Thumbnail, Line } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons'
 import { Col, Row, Grid } from 'react-native-easy-grid';
@@ -32,15 +32,16 @@ class ListGrades extends React.Component {
 
   //6.1.2015192.1
   //grado, seccion, codigoalumno, parcial
-  getData = async (partial) => {
+  getData = async () => {
     try {
 
-      const { StudentCode, Username, GradeId, SectionId } = this.props.navigation.state.params;
+      var partial = this.state.partial;
+      const { StudentCode, GradeId, SectionId } = this.props.navigation.state.params;
       
-      console.log(`studentCode: ${StudentCode} - u: ${Username} - g:${GradeId} - s:${SectionId}`);
+      console.log(`GradesScreen: studentCode: ${StudentCode} - g:${GradeId} - s:${SectionId} - p:${partial}`);
 
-      const grades = await this.api.getGrades(Number(GradeId), Number(SectionId), Number(StudentCode), partial);
-      const average = await this.api.getAverage(Number(GradeId), Number(SectionId), Number(StudentCode), partial);
+      const grades = await this.api.getGrades(Number(GradeId), Number(SectionId), StudentCode, partial);
+      const average = await this.api.getAverage(Number(GradeId), Number(SectionId), StudentCode, partial);
       
       console.log(grades.data.grades);
       if(grades.data.success === true){
@@ -48,6 +49,8 @@ class ListGrades extends React.Component {
             data: grades.data.grades,
             average: average.data.average,
         });
+      } else {
+        Alert.alert("Mensaje", `No hay notas registradas estudiante: ${StudentCode}`);
       }
     } catch(err){
       console.error(`Error on GradesScreen: ${err}`);
@@ -69,7 +72,7 @@ class ListGrades extends React.Component {
     })
 
     console.log("is refreshing");
-    this.getData(this.state.partial);
+    this.getData();
 
     this.setState({
       isRefreshing: false
@@ -81,7 +84,7 @@ class ListGrades extends React.Component {
     this.setState({
         partial: p,
     });
-    this.getData(p);
+    this.getData();
   }
 
   onBackPartial(){
@@ -89,11 +92,11 @@ class ListGrades extends React.Component {
     this.setState({
         partial: p,
     });
-    this.getData(p);
+    this.getData();
   }
 
   componentDidMount(){
-    this.getData(this.state.partial);
+    this.getData();
   }
 
   _refreshControl(){

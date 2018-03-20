@@ -27,9 +27,12 @@ class ListHomeWork extends React.Component {
   getData = async () => {
     try{
 
-      const { StudentCode, Username, GradeId, SectionId } = this.props.navigation.state.params;
+      const { StudentCode, GradeId, SectionId } = this.props.navigation.state.params;
       
       const homeworks = await this.api.getHomeWork(Number(GradeId), Number(SectionId));
+
+      console.log(`HomeWorkScreen`);
+      console.log(homeworks.data);
 
       this.setState({
           data: homeworks.data,
