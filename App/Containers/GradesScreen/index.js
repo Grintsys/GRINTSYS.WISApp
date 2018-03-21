@@ -32,10 +32,10 @@ class ListGrades extends React.Component {
 
   //6.1.2015192.1
   //grado, seccion, codigoalumno, parcial
-  getData = async () => {
+  getData = async (partial) => {
     try {
 
-      var partial = this.state.partial;
+      //var partial = this.state.partial;
       const { StudentCode, GradeId, SectionId } = this.props.navigation.state.params;
       
       console.log(`GradesScreen: studentCode: ${StudentCode} - g:${GradeId} - s:${SectionId} - p:${partial}`);
@@ -72,7 +72,7 @@ class ListGrades extends React.Component {
     })
 
     console.log("is refreshing");
-    this.getData();
+    this.getData(this.state.partial);
 
     this.setState({
       isRefreshing: false
@@ -84,7 +84,7 @@ class ListGrades extends React.Component {
     this.setState({
         partial: p,
     });
-    this.getData();
+    this.getData(p);
   }
 
   onBackPartial(){
@@ -92,11 +92,11 @@ class ListGrades extends React.Component {
     this.setState({
         partial: p,
     });
-    this.getData();
+    this.getData(p);
   }
 
   componentDidMount(){
-    this.getData();
+    this.getData(this.state.partial);
   }
 
   _refreshControl(){
@@ -111,35 +111,40 @@ class ListGrades extends React.Component {
   render() {
     return (
       <Container>
-        <Content contentContainerStyle={{flex: 1}} refreshControl={this._refreshControl()}>
-            <Grid style={{  }}>
-                <Row style={{ backgroundColor: '#2196F3', height: 70, padding: 15, justifyContent: 'space-between' }}>
+        <Content>
+            <Grid>
+                <Row style={{ backgroundColor: '#2196F3', paddingLeft: 10, paddingRight: 10, paddingTop: 5, justifyContent: 'space-between' }}>
                     <Button iconCenter light onPress={this.onBackPartial.bind(this)}>
                         <Icon name='arrow-back' />
                     </Button>
-                    <Text style={{ fontSize: 24, color: 'white', padding: 10}}>Parcial {this.state.partial}</Text>
+                    <Text style={Styles.averageText}>Parcial {this.state.partial}</Text>
                     <Button iconCenter light onPress={this.onForwardPartial.bind(this)}>
                         <Icon name='arrow-forward' />
                     </Button>
                 </Row>
-                <Row style={{ backgroundColor: '#2196F3', height: 50, paddingLeft: 25}}>
+                <Row style={{ backgroundColor: '#2196F3'}}>
                     <Col style={{ alignContent: 'center' }}>
-                        <Text style={{ fontSize: 24, color: 'white' }}>{this.state.average} - Promedio</Text>
+                        <Text style={Styles.averageText}>{this.state.average}% - Promedio</Text>
                     </Col>
                 </Row>
                 <Row>
                     <List dataArray={this.state.data}
                           renderRow={(item) =>                               
                                 <ListItem>
-                                  <Body>
-                                    <Text style={Styles.bigText}>{item.Total}</Text>
-                                    <Text note>{item.Clase}</Text>
-                                  </Body>
-                                  <Right>
-                                    <Text note>E: {item.Examen}</Text>
-                                    <Text note>TA: {item.TrabajoAula}</Text>
-                                    <Text note>TC: {item.TrabajoClase}</Text>
-                                  </Right>
+                                  <Grid>
+                                  <Row>
+                                    <Col>
+                                      <Text style={Styles.smallText}>{item.Clase}</Text>
+                                      <Text style={Styles.bigText}>{item.Total}</Text>                                    
+                                    </Col>
+                                    <Col>
+                                      <Text note style={Styles.contentMargin}>Examen: {item.Examen}</Text>
+                                      <Text note style={Styles.contentMargin}>Trabajo Aula: {item.TrabajoAula}</Text>
+                                      <Text note style={Styles.contentMargin}>Trabajo Clase: {item.TrabajoClase}</Text>
+                                      <Text note style={Styles.contentMargin}>Nivelacion: {item.Nivelacion}</Text>               
+                                    </Col>
+                                  </Row>
+                                  </Grid>
                                 </ListItem>                            
                               } />
                 </Row>

@@ -70,7 +70,7 @@ class SwitchStudents extends React.Component {
                         <Text note>{item.Name}</Text>
                       </Body> 
                       <Right>
-                        <Button transparent>
+                        <Button transparent onPress={() => (this.onStudentNavigation(item.StudentCode))}>
                           <Icon name="ios-arrow-forward" />
                         </Button>
                       </Right>
