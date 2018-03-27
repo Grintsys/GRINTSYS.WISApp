@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, LayoutAnimation, Platform, StyleSheet, UIManager 
 import { Image, View } from 'react-native-animatable'
 import PropTypes from 'prop-types'
 
-import imgLogo from '../../Images/wis_logo.jpg'
+import imgLogo from '../../Images/wis_logo_hd.png'
 import metrics from '../../Config/Metrics'
 
 import Opening from './Opening'

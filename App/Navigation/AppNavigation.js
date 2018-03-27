@@ -11,6 +11,7 @@ import RootScreen from '../Containers/RootScreen'
 
 //tab navigation
 import Tareas from '../Containers/HomeWorkScreen'
+import TareasDetails  from '../Containers/HomeWorkDetailsScreen'
 import Pagos from '../Containers/FinancesScreen'
 import Calendario from "../Containers/CalendarScreen";
 import Notas from "../Containers/GradesScreen";
@@ -25,7 +26,7 @@ const DrawerStack = DrawerNavigator({
   Accounts: { screen: SwitchStudent },
   //Login: { screen: RootScreen },
 })
-  
+
 const TabNav = TabNavigator({
     Calendario: {
       screen: Calendario, 
@@ -59,11 +60,12 @@ const TabNav = TabNavigator({
     {
       animationEnabled: true,
       swipeEnabled: true,
-    });
+    });    
 
 const TabStack =  StackNavigator({
   TabStack: { screen: TabNav },
   SwitchStudent: { screen: SwitchStudent },
+  HomeworkDetails: { screen: TareasDetails }
   //DrawerStack: { screen: DrawerStack },
 },
   {

@@ -50,6 +50,11 @@ class ListHomeWork extends React.Component {
     this.props.navigation.navigate("SwitchStudent")
   }
 
+  onHomeworkNavigation = (Title, Description, RemainTime) => {
+    //console.log(Description);
+    this.props.navigation.navigate("HomeworkDetails", { Title: Title, Content: Description, RemainTime: RemainTime })
+  }
+
   _renderItem = ({ item }) => {
       //console.log(item);
     return (
@@ -70,9 +75,20 @@ class ListHomeWork extends React.Component {
   render() {
     return (
       <Container>
-        <FlatList data={this.state.data} 
-                  keyExtractor={(item, index) => index} 
-                  renderItem={this._renderItem} />
+        <List dataArray={this.state.data}
+              renderRow={(item) =>   
+                          <ListItem buttom onPress={() => (this.onHomeworkNavigation(item.Subject, item.Description, item.RemainTime))}>
+                            <Thumbnail square size={80} source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }} />
+                            <Body>
+                              <Text>{item.Description}</Text>
+                              <Text note>{item.Subject}</Text>
+                            </Body> 
+                            <Right>
+                              <Text note>{item.Value} Pts</Text>
+                              <Text note>{item.RemainTime} Dias</Text>
+                            </Right>
+                          </ListItem> 
+                } />
       </Container>
     );
   }
