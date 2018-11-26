@@ -18,9 +18,7 @@ import Notas from "../Containers/GradesScreen";
 
 // Drawer Navigation
 import SwitchStudent from '../Containers/SwitchStudentScreen'
-import TestScreen from '../Containers/TestScreen'
-
-import styles from './Styles/NavigationStyles'
+import LogoutScreen from '../Containers/LogoutScreen'
 
 const TabNav = TabNavigator({
     Calendario: {
@@ -61,6 +59,7 @@ const TabStack =  StackNavigator({
   TabStack: { screen: TabNav },
   SwitchStudent: { screen: SwitchStudent },
   HomeworkDetails: { screen: TareasDetails },
+  Login: { screen: RootScreen },
   },
   {
     headerMode: 'screen',
@@ -93,12 +92,12 @@ const TabStack =  StackNavigator({
 
 const MyDrawer = DrawerNavigator({
     Home: { screen: TabStack },
-    Login: { screen: RootScreen },
+    Accounts: { screen: SwitchStudent },
+    Logout: { screen: LogoutScreen },
 })
 
 const RootStack = StackNavigator({
   Login: { screen: RootScreen },
-  Accounts: { screen: SwitchStudent },
   Drawer: {
     screen: MyDrawer,
     navigationOptions: { header: null },//Prevent double header
