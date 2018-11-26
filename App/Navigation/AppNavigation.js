@@ -22,11 +22,6 @@ import TestScreen from '../Containers/TestScreen'
 
 import styles from './Styles/NavigationStyles'
 
-const DrawerStack = DrawerNavigator({
-  Accounts: { screen: SwitchStudent },
-  //Login: { screen: RootScreen },
-})
-
 const TabNav = TabNavigator({
     Calendario: {
       screen: Calendario, 
@@ -65,9 +60,8 @@ const TabNav = TabNavigator({
 const TabStack =  StackNavigator({
   TabStack: { screen: TabNav },
   SwitchStudent: { screen: SwitchStudent },
-  HomeworkDetails: { screen: TareasDetails }
-  //DrawerStack: { screen: DrawerStack },
-},
+  HomeworkDetails: { screen: TareasDetails },
+  },
   {
     headerMode: 'screen',
     navigationOptions: ({navigation}) => ({
@@ -87,27 +81,29 @@ const TabStack =  StackNavigator({
           })}>
           <Icon name='ios-people' style={{color: 'white'}} />
         </Button>
-      )
-    })
-})
-
-
-/*
+      ),
       headerLeft: (
-        <Button transparent>
+        <Button onPress={() => navigation.navigate('DrawerOpen')} transparent>
             <Icon name='menu' />
         </Button>
-      ),
-*/
+      )
+    })
+  }
+)
 
-const PrimaryNav = StackNavigator(
-{
-    LoginStack: { screen: RootScreen },
-    TabStack: { screen: TabStack },
-    //DrawerStack: { screen: DrawerStack },
-}, {
-      headerMode: 'none',
-      initialRouteName: 'LoginStack',
+const MyDrawer = DrawerNavigator({
+    Home: { screen: TabStack },
+    Login: { screen: RootScreen },
 })
 
-export default PrimaryNav;
+const RootStack = StackNavigator({
+  Login: { screen: RootScreen },
+  Accounts: { screen: SwitchStudent },
+  Drawer: {
+    screen: MyDrawer,
+    navigationOptions: { header: null },//Prevent double header
+  }
+})
+
+
+export default RootStack;

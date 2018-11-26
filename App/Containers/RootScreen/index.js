@@ -50,7 +50,7 @@ export class LoginAnimation extends Component {
   }
 
   handleHomeNavigation = (studentcode, username, grade, section) => {
-    this.props.navigation.navigate('TabStack', {
+    this.props.navigation.navigate('Drawer', {
       StudentCode: studentcode, 
       Username: username,
       GradeId: grade,
@@ -61,6 +61,8 @@ export class LoginAnimation extends Component {
   doLogin = async (username, password) =>{
 
     const response = await this.api.doLogin(username, password);
+
+    debugger;
 
     if(response.data.success === true){
 

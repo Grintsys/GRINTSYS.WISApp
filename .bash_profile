@@ -1,0 +1,1 @@
+export PATH=$PATH:/Users/whoami/Library/Android/sdk/platform-tools

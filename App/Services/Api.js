@@ -1,6 +1,7 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 import Secrets from 'react-native-config'
+let qs = require('querystringify');
 
 // our "constructor"
 const create = (baseURL = Secrets.WIS_API_URL) => {
@@ -15,7 +16,8 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
+      'Accept': 'application/json',
     },
     // 10 second timeout...
     timeout: 10000
@@ -34,8 +36,8 @@ const create = (baseURL = Secrets.WIS_API_URL) => {
   //
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
-  //
-  const doLogin = (username, password) => api.post(`/login`, { username: username, password: password} )
+  
+  const doLogin = (username, password) => api.post(`/users/login`, { username: username, password: password})
   const getStudent = (username) => api.get(`/student/${username}$`)
   const getStudentData = (student) => api.get(`student/${student}/data`)
   const getStudents = (username) => api.get(`/students/${username}`)
