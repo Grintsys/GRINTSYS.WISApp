@@ -5,7 +5,6 @@ import { List, ListItem, Text, View, Container, Content, Header, Title, Button, 
 // import Icon from 'react-native-vector-icons/Ionicons'
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import API from "../../Services/Api"
-import FJSON from 'format-json'
 import Styles from '../Styles/HeaderTabStyles'
 
 class ListGrades extends React.Component {
@@ -24,6 +23,7 @@ class ListGrades extends React.Component {
       loading: false,
       average: 0,
       partial: 1,
+      partial_count: 4,
       isRefreshing: false,
     }
 
@@ -80,7 +80,7 @@ class ListGrades extends React.Component {
   }
 
   onForwardPartial(){
-    var p = (this.state.partial >= 3 ? 1 : this.state.partial + 1);
+    var p = (this.state.partial >= this.state.partial_count ? 1 : this.state.partial + 1);
     this.setState({
         partial: p,
     });
@@ -88,7 +88,7 @@ class ListGrades extends React.Component {
   }
 
   onBackPartial(){
-    var p = (this.state.partial > 1 ? this.state.partial - 1 : 3);
+    var p = (this.state.partial > 1 ? this.state.partial - 1 : this.state.partial_count);
     this.setState({
         partial: p,
     });
